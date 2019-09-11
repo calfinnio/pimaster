@@ -1,11 +1,10 @@
 ---
- - hosts: all
-   vars:
-     - homelab_password: ''
-  gather_facts: no
-   remote_user: root
- 
-   tasks:
+- hosts: all
+  vars:
+    - homelab_password: ''
+ gather_facts: no
+  remote_user: root
+  tasks:
  
    - name: Add a new user named homelab
      user:
