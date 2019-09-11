@@ -2,7 +2,7 @@
 - hosts: all
   vars:
     - homelab_password: ''
- gather_facts: no
+  gather_facts: no
   remote_user: root
   tasks:
  
@@ -40,7 +40,7 @@
            backup=yes
      notify:
        - restart ssh
- 
+
    handlers:
    - name: restart ssh
      service:
