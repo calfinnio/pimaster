@@ -3,7 +3,8 @@
   vars:
     - homelab_password: ''
   gather_facts: no
-  remote_user: root
+  remote_user: pi
+  become: yes
   tasks:
  
    - name: Add a new user named homelab
@@ -21,28 +22,28 @@
                      key="{{ lookup('file', '/home/homelab/.ssh/id_rsa.pub') }}"
                      state=present
  
-   - name: Disable Password Authentication
-     lineinfile:
-           dest=/etc/ssh/sshd_config
-           regexp='^PasswordAuthentication'
-           line="PasswordAuthentication no"
-           state=present
-           backup=yes
-     notify:
-       - restart ssh
+#   - name: Disable Password Authentication
+#     lineinfile:
+#           dest=/etc/ssh/sshd_config
+#           regexp='^PasswordAuthentication'
+#           line="PasswordAuthentication no"
+#           state=present
+#           backup=yes
+#     notify:
+#       - restart ssh
  
-   - name: Disable Root Login
-     lineinfile:
-           dest=/etc/ssh/sshd_config
-           regexp='^PermitRootLogin'
-           line="PermitRootLogin no"
-           state=present
-           backup=yes
-     notify:
-       - restart ssh
+#   - name: Disable Root Login
+#     lineinfile:
+#           dest=/etc/ssh/sshd_config
+#           regexp='^PermitRootLogin'
+#           line="PermitRootLogin no"
+#           state=present
+#           backup=yes
+#     notify:
+#       - restart ssh
 
-   handlers:
+  handlers:
    - name: restart ssh
      service:
-       name=sshd
+       name=ssh
        state=restarted
