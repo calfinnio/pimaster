@@ -15,7 +15,7 @@
 
 - name: install ssh pubkeys for new users
   authorized_key: user="{{ item.name }}"
-                  key="{{ item.pubkey }}"
+                  key="{{ lookup('file', '/home/homelab/.ssh/id_rsa.pub') }}"
                   state=present
   with_items: "{{ create_users }}"
   tags: [ 'users' ]
