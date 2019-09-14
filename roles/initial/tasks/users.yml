@@ -23,4 +23,9 @@
 - name: Add homelab user to the sudoers
   copy:
       dest: "/etc/sudoers.d/homelab"
-      content: "provision  ALL=(ALL)  NOPASSWD: ALL"
+      content: "homelab  ALL=(ALL)  NOPASSWD: ALL"
+
+- name: Change file ownership, group and permissions
+  file:
+    path: "/etc/sudoers.d/homelab"
+    mode: '0440'
