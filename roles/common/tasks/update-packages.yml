@@ -4,3 +4,16 @@
   apt: update_cache=yes
 - name: upgrade a server
   apt: upgrade=full
+- name: restart system to reboot to newest kernel
+  shell: "sleep 5 && reboot"
+  async: 1
+  poll: 0
+- name: wait for 10 seconds
+  pause:
+    seconds: 10
+- name: wait for the system to reboot
+  wait_for_connection:
+    connect_timeout: 20
+    sleep: 5
+    delay: 5
+    timeout: 60
