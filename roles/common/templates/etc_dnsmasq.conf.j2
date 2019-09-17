@@ -9,42 +9,18 @@ port={{ item.port }}
 log-dhcp
 {% endif %}
 
-{% if dnsmasq_dhcp_ranges is defined %}
-{% for range in dnsmasq_dhcp_ranges %}
-dhcp-range={{ range.start_addr }},{{ range.end_addr }},{{ range.lease_time }}
-{% endfor%}
-
-{% endif %}
-{% if dnsmasq_dhcp_hosts is defined %}
-{% for host in dnsmasq_dhcp_hosts %}
-dhcp-host={{ host.mac }},{{ host.ip  }}{% if host.name is defined %},{{ host.name }}{% endif %}
-
-{% endfor %}
-
-{% endif %}
-{% if dnsmasq_option_router is defined %}
-dhcp-option=option:router,{{ dnsmasq_option_router }}
+{% if item.network_range is defined %}
+dhcp-range={{ item.network_range }},proxy
 {% endif %}
 
-{% if dnsmasq_upstream_servers is defined %}
-{% if dnsmasq_upstream_servers is iterable %}
-{% for host in dnsmasq_upstream_servers %}
-server={{ host }}
-{% endfor %}
-{% else %}
-server={{ dnsmasq_upstream_servers }}
-{% endif %}
+{% if item.tftp is sameas true %}
+enable-tftp
 {% endif %}
 
-{% if dnsmasq_authoritative %}
-dhcp-authoritative
+{% if item.tftp_root is defined %}
+tftp-root={{ item.tftp-root }}
 {% endif %}
 
-{% if dnsmasq_srv_hosts is defined %}
-{% for host in dnsmasq_srv_hosts %}
-srv-host={{ host.name }}{% if host.target is defined %},{{ host.target }}{% endif %}{% if host.port is defined %},{{ host.port }}{% endif %}{% if host.priority is defined %},{{ host.priority }}{% endif %}{% if host.weight is defined %},{{ host.weight }}{% endif %}
-
-{% endfor %}
+{% if item.pxe_service is defined %}
+pxe_service={{ item.pxe_service }}
 {% endif %}
-
-conf-dir=/etc/dnsmasq.d
