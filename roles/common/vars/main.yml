@@ -1,18 +1,10 @@
 ---
-macaddrs:
-    b8:27:eb:39:d7:57:
-        hostname: "pimaster"
-        domain: "houseofbears.co.uk"
-        locale: "en_GB.UTF-8"
-
 ### Users that must be present on the system
-create_users:
-  - name: homelab
-    homelab_password: ''
-    comment: "HomeLab user"
-    uid: 1024
-    group: users
-    # don't include the group from 'group:' above in the 'groups:' below; this
-    # breaks idempotency for some reason
-    groups: "adm,dialout,sudo,audio,video,plugdev,games,input,netdev,spi,i2c,gpio"
-    pubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCjx1Fevx4XODj8pJy/qRZDwQCRwNl0tJ3gWlDy1dB/AtdapVh5XYDUI99R+JqqzGgME9Bif6p1K6bqClLQh7MeY57L9IyjtqBF2t6/vNeKdOYDYQcBwL1p7vbGNTfKxYF2G4Lw+tRVGr3c+sCvA6r5UUAIhXNXTs7fLZanO6JGwITlJFcxDXPmITEhoXu4yTFqA0j1yp/K7I7dvmlhG/Yq+8P6zTJww1Zpy3aMaJ9gB4KR9jclW67wQZ3kVkFcyJtHXRI/LTzfAitB9W1X0svXysy88DiZsBGm1UmrUuFD3JPRn0SRRYchW5RdZ7MDPYWUDWweZIeuWvWRKzMkB5VJ"
+dnsmasq_vars:
+  - port: 0
+    log: true
+    network_range: 192.168.1.0
+    dhcp_proxy: true
+    tftp: true
+    tftp_root: /var/lib/tftpboot
+    pxe_service: 'X86PC,"PXE Boot...",pxelinux'
