@@ -15,7 +15,7 @@
   template:
     src: etc_dnsmasq.conf.j2
     dest: /etc/dnsmasq.conf
-    validate: 'dnsmasq --test --conf-file=%s'
+    #validate: 'dnsmasq --test --conf-file=%s'
   with_items: "{{ dnsmasq_vars }}"
   notify: restart_dnsmasq
   tags: [ 'dnsmasq' ]

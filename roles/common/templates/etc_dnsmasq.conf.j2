@@ -10,7 +10,7 @@ log-dhcp
 {% endif %}
 
 {% if item.network_range is defined %}
-dhcp-range={{ item.network_range }},proxy
+dhcp-range={{ item.network_range }}
 {% endif %}
 
 {% if item.tftp is sameas true %}
@@ -18,7 +18,7 @@ enable-tftp
 {% endif %}
 
 {% if item.tftp_root is defined %}
-    tftp-root={{ item.tftp_root }}
+tftp-root={{ item.tftp_root }}
 {% endif %}
 
 {% if item.pxe_service is defined %}
