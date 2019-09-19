@@ -1,12 +1,7 @@
 ---
-tasks:
-  - name: Install NTP
-    apt: name=ntp update_cache=yes
-  - name: Copy the ntp.conf template file
-    template: src=ntp.conf.j2 dest=/etc/ntp.conf
-    notify:
-      - restart ntp
-
-handlers:
-  - name: restart ntp
-    service: name=ntp state=restarted
+- name: Install NTP
+  apt: name=ntp update_cache=yes
+- name: Copy the ntp.conf template file
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  notify:
+   - restart_ntp
