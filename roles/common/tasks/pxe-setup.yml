@@ -15,6 +15,7 @@
   file:
     path: /opt/tftpboot
     state: directory
+  tags: [ 'dnsmasq' ]
 
 - name: Set configuration file
   template:
@@ -37,6 +38,7 @@
         uid=1010
         state=present
         shell=/bin/bash
+  tags: [ 'nginx']
 
 - name: Install nginx
   package:
@@ -48,6 +50,7 @@
   file:
     path: /opt/www/html
     state: directory
+  tags: [ 'nginx']
 
 - name: copy nginx configuration file
   template:
@@ -58,3 +61,22 @@
     mode: u=rw,g=r,o=r
   with_items: "{{ nginx_vars }}"
   notify: restart_nginx
+  tags: [ 'nginx']
+
+- name: download syslinux
+  get_url: 
+    url: https://www.kernel.org/pub/linux/utils/boot/syslinux/3.xx/syslinux-3.86.tar.gz
+    dest: /home/homelab/syslinux-3.86.tar.gz
+    checksum: sha256:c5fb189978d1a2d2041cc69a2956981e305ecd5cb9ce03f589d3fd1f1c434038
+
+- name: Unarchive syslinux
+  unarchive:
+    src: /home/homelab/syslinux-3.86.tar.gz
+    dest: /home/homelab/syslinux
+    remote_src: yes
+
+- name: Ansible copy files remote to remote
+  copy:
+    src: /home/homelab/syslinux/core/pxelinux.0
+    dest: /opt/tftpboot/
+    remote_src: yes
