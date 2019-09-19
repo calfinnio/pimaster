@@ -32,6 +32,12 @@
     enabled: yes
   tags: [ 'dnsmasq' ]
 
+- name: create users
+  user: name=nginx
+        uid=1010
+        state=present
+        shell=/bin/bash
+
 - name: Install nginx
   package:
     name: nginx
