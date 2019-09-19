@@ -13,3 +13,9 @@ nginx_vars:
   - nginx_service_name: nginx
     nginx_port: 80
     nginx_root: /opt/www/html
+
+esxi-host:
+  - name: esx1.houseofbears.co.uk
+    macaddress: 34:17:eb:ba:2c:c1
+    major_version: 6.7
+    minor_version: u3
