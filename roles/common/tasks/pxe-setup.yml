@@ -11,6 +11,11 @@
     state: present
   tags: [ 'dnsmasq' ]
 
+- name: Creates directory
+  file:
+    path: /opt/tftpboot
+    state: directory
+
 - name: Set configuration file
   template:
     src: etc_dnsmasq.conf.j2

@@ -10,7 +10,7 @@ log-dhcp
 {% endif %}
 
 {% if item.network_range is defined %}
-dhcp-range={{ item.network_range }}
+dhcp-range={{ item.network_range }},proxy
 {% endif %}
 
 {% if item.tftp is sameas true %}
