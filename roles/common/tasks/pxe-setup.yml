@@ -20,7 +20,7 @@
   template:
     src: etc_dnsmasq.conf.j2
     dest: /etc/dnsmasq.conf
-    #validate: 'dnsmasq --test --conf-file=%s'
+    validate: 'dnsmasq --test --conf-file=%s'
   with_items: "{{ dnsmasq_vars }}"
   notify: restart_dnsmasq
   tags: [ 'dnsmasq' ]
@@ -31,3 +31,24 @@
     state: started
     enabled: yes
   tags: [ 'dnsmasq' ]
+
+- name: Install nginx
+  package:
+    name: nginx
+    state: present
+  tags: [ 'nginx' ]
+
+- name: Creates directory
+  file:
+    path: /opt/www/html
+    state: directory
+
+- name: copy nginx configuration file
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: nginx
+    group: nginx
+    mode: u=rw,g=r,o=r
+  with_items: "{{ nginx_vars }}"
+  notify: restart_nginx

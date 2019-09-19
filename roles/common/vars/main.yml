@@ -8,3 +8,8 @@ dnsmasq_vars:
     tftp: true
     tftp_root: /opt/tftpboot
     pxe_service: 'X86PC,"PXE Boot...",pxelinux'
+
+nginx_vars:
+  - nginx_service_name: nginx
+    nginx_port: 80
+    nginx_root: /opt/www/html
