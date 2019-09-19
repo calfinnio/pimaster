@@ -3,5 +3,6 @@
   apt: name=ntp update_cache=yes
 - name: Copy the ntp.conf template file
   template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  with_items: "{{ ntp_config }}"
   notify:
    - restart_ntp

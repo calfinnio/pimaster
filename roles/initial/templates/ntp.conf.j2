@@ -1,6 +1,6 @@
 driftfile /var/lib/ntp/drift
 
-{% for i in ntp_server %}
+{% for i in item.ntp_server %}
 server {{ i }}
 {% endfor %}
 
