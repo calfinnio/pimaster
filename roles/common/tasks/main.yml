@@ -1,3 +1,4 @@
 ---
 - include: update-packages.yml
 - include: pxe-setup.yml
+- include: esx-pxe.yml
