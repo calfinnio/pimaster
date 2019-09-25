@@ -13,5 +13,6 @@
   with_items: "{{ esxi_host }}"
 - name: Using sed to remove "/" from boot.cfg
   shell:  sed -i 's/\///g' {{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}/boot.cfg
+  with_items: "{{ esxi_host }}"
 #- name: Append config to boot.cfg
 #- name: Write PXE config
