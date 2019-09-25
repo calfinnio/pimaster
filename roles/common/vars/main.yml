@@ -14,10 +14,10 @@ nginx_vars:
     nginx_port: 80
     nginx_root: /opt/www/html
 
-esxi-host:
-  - name: esx1.houseofbears.co.uk
+esxi_host:
+  - hostname: "esx1.houseofbears.co.uk"
     macaddress: 34:17:eb:ba:2c:c1
-    major_version: 6.7
-    minor_version: u3
-    tftp_root: /opt/tftpboot/
+    major_version: "67"
+    minor_version: "u3"
+    tftp_root: /opt/tftpboot/esxi65u3/
     refresh: true
