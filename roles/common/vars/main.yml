@@ -19,5 +19,5 @@ esxi_host:
     macaddress: 34:17:eb:ba:2c:c1
     major_version: "67"
     minor_version: "u3"
-    tftp_root: /opt/tftpboot/esxi65u3/
+    tftp_root: /opt/tftpboot/
     refresh: true
