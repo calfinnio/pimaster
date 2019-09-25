@@ -86,7 +86,7 @@
 
 - name: Ansible copy files remote to remote
   copy:
-    src: /home/homelab/syslinux-3.86/core/vesamenu.c32
+    src: /home/homelab/syslinux-3.86/com32/menu/vesamenu.c32
     dest: /opt/tftpboot/
     remote_src: yes
   tags: [ 'pxe']
