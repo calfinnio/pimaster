@@ -33,4 +33,5 @@
     regexp: '^(.*)kernelopt(.*)$' 
     line: 'kernelopt=ks=http://192.168.1.253/ks/ks.cfg'
     backrefs: yes
+  with_items: "{{ esxi_host }}"
 #- name: Write PXE config
