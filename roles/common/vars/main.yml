@@ -17,6 +17,10 @@ nginx_vars:
 esxi_host:
   - hostname: "esx1.houseofbears.co.uk"
     macaddress: 34:17:eb:ba:2c:c1
+    ip_addr: 192.168.1.11
+    ip_subnetmask: 255.255.255.0
+    ip_gateway: 192.168.1.1
+    ip_nameserver: 192.168.1.1
     major_version: "67"
     minor_version: "u3"
     tftp_root: /opt/tftpboot/

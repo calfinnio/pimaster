@@ -103,3 +103,9 @@
     dest: /opt/tftpboot/pxelinux.cfg/default
   with_items: "{{ esxi_host }}"
   tags: [ 'pxe']
+
+- name: Install Wake-On-Lan
+  package:
+    name: wakeonlan
+    state: present
+  tags: [ 'wol' ]
