@@ -1,14 +1,14 @@
 ---
 ### Users that must be present on the system
 dnsmasq_vars:
-  - port: 0
-    log: true
+  - log: true
     network_range: 192.168.1.0
     dhcp_proxy: true
     tftp: true
     tftp_root: /opt/tftpboot
     pxe_service: 'X86PC,"PXE Boot...",pxelinux'
     dns_enabled: true
+    port: 53
     dns_upstream: 192.168.1.1
     dns_domainname: houseofbears.co.uk
     dns_statichosts: "/etc/dnsmasq_static_hosts.conf"

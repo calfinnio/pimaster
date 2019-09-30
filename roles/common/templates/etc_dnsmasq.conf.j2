@@ -12,10 +12,9 @@ no-hosts
 addn-hosts={{ item.dns_statichosts }}
 expand-hosts
 domain={{ item.dns_domainname }}
-{% endif %}
-
-{% if dnsmasq_port is defined %}
 port={{ item.port }}
+{% else %}
+port=0
 {% endif %}
 
 {% if item.log is sameas true %}
