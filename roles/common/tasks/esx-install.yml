@@ -1,0 +1,9 @@
+---
+- name: Wake on Lan physical host
+  shell:  wakeonlan {{ item.macaddress }}
+  with_items: "{{ esxi_host }}"
+  tags: [ 'physcial_esxi_install', 'never']
+
+- name: Power on virtualbox VM
+  local_action: VBoxManage startvm "TestPxE"
+  tags: [ 'testing', 'never']
