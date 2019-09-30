@@ -2,7 +2,7 @@
 # {{ ansible_managed }}
 
 vmaccepteula
-{% if ansible_product_name is 'VirtualBox' %}
+{% if ansible_product_name == 'VirtualBox' %}
 install --firstdisk=local --overwritevmfs --novmfsondisk
 {% else %}
 install --firstdisk=usb --overwritevmfs --novmfsondisk
