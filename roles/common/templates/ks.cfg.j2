@@ -4,8 +4,8 @@
 vmaccepteula
 {% if ansible_product_name is 'VirtualBox' %}
 install --firstdisk=local --overwritevmfs --novmfsondisk
-#{% else %}
-#install --firstdisk=usb --overwritevmfs --novmfsondisk
+{% else %}
+install --firstdisk=usb --overwritevmfs --novmfsondisk
 {% endif %}
 reboot
 
