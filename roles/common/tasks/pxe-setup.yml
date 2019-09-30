@@ -26,6 +26,14 @@
   notify: restart_dnsmasq
   tags: [ 'dnsmasq' ]
 
+- name: Creates static hosts file
+  file:
+    path: "{{ item.dns_statichosts }}"
+    state: touch
+  with_items: "{{ dnsmasq_vars }}"
+  notify: restart_dnsmasq
+  tags: [ 'dnsmasq' ]
+
 - name: Make sure Dnsmasq is running
   service:
     name: dnsmasq
