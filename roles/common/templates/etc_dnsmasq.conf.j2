@@ -1,6 +1,19 @@
 # Dnsmasq configuration
 # {{ ansible_managed }}
 
+{% if item.dns_enabled is sameas true %}
+domain-needed
+bogus-priv
+no-resolv
+no-poll
+server={{ item.dns_upstream }}
+local=/{{ item.dns_domainname }}/
+no-hosts
+addn-hosts={{ item.dns_statichosts }}
+expand-hosts
+domain={{ item.dns_domainname }}
+{% endif %}
+
 {% if dnsmasq_port is defined %}
 port={{ item.port }}
 {% endif %}
