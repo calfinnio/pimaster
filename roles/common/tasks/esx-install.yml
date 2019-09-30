@@ -5,5 +5,6 @@
   when: production | default(False)
 
 - name: Power on virtualbox VM
-  local_action: VBoxManage startvm "TestPxE"
+  shell: VBoxManage startvm "TestPxE"
+  delegate_to: localhost
   when: testing | default(False)
