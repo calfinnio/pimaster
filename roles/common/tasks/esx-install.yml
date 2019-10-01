@@ -8,3 +8,20 @@
   shell: VBoxManage startvm "TestPxE"
   delegate_to: localhost
   when: testing | default(False)
+
+- name: Wait for PxE offer then sleep
+  wait_for:
+    path: /var/log/syslog
+    search_regex: "{{ item.macaddress }} pxelinux.0"
+    sleep: 5
+  with_items: "{{ esxi_host }}"
+  when: production | default(False)
+#- name: replace line
+#  lineinfile: 
+#    dest: /etc/dnsmasq.conf
+#    regexp: '^(.*)enable-tftp(.*)$' 
+#    line: ''
+#    backrefs: yes
+#  when: 
+#  - testing
+#  - production
