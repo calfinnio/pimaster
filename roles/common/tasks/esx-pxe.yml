@@ -37,7 +37,7 @@
   lineinfile: 
     dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}/boot.cfg"
     regexp: '^(.*)kernelopt(.*)$' 
-    line: 'kernelopt=ks=http://192.168.1.253/ks/ks.cfg'
+    line: 'kernelopt=ks=http://{{ ansible_default_ipv4 }}/ks/ks.cfg'
     backrefs: yes
   with_items: "{{ esxi_host }}"
   tags: [ 'esxi_build']

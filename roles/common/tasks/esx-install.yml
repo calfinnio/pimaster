@@ -9,6 +9,10 @@
   delegate_to: localhost
   when: testing | default(False)
 
+- name: Roate syslog to avoid multiple returns of proxy
+  shell: logrotate --force /etc/logrotate.d/rsyslog
+  when: production | default(False)
+  
 - name: Wait for PxE offer then sleep
   wait_for:
     path: /var/log/syslog
