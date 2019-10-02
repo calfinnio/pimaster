@@ -11,10 +11,8 @@
   when: testing | default(False)
   tags: [ 'esxi_install']
 
-- name: Display all variables/facts known for a host
-  debug:
-    var: "dnsmasq-dhcp*PXE(wlan0)*{{ item.macaddress }} pxelinux.0"
-  with_items: "{{ esxi_host }}"
+- name: Rotate dnsmasq.log
+  shell: logrotate --force /etc/logrotate.d/dnsmasq
   tags: [ 'esxi_install']
 
 - name: Wait for PxE offer then sleep
