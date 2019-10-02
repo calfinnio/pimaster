@@ -19,6 +19,7 @@ port=0
 
 {% if item.log is sameas true %}
 log-dhcp
+log-facility=/var/log/dnsmasq.log
 {% endif %}
 
 {% if item.network_range is defined %}

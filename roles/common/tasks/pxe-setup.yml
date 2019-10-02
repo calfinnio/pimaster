@@ -34,6 +34,13 @@
   notify: restart_dnsmasq
   tags: [ 'dnsmasq' ]
 
+- name: Create logrotate file for DHCP logs
+  template:
+    src: dnsmasq_logrotate.j2
+    dest: /etc/logrotate.d/dnsmasq
+  notify: restart_dnsmasq
+  tags: [ 'dnsmasq' ]
+
 - name: Make sure Dnsmasq is running
   service:
     name: dnsmasq
