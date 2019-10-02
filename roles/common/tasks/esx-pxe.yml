@@ -12,7 +12,7 @@
     dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}"
     force: no
   with_items: "{{ esxi_host }}"
-  #when: refresh | default(False)
+  when: refresh | default(False)
   tags: [ 'esxi_build']
 
 - name: Using sed to remove "/" from boot.cfg
@@ -36,8 +36,9 @@
 - name: replace line
   lineinfile: 
     dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}/boot.cfg"
+    #dest: /opt/tftpboot/esxi67u3/boot.cfg
     regexp: '^(.*)kernelopt(.*)$' 
-    line: 'kernelopt=ks=http://{{ ansible_default_ipv4 }}/ks/ks.cfg'
+    line: "kernelopt=ks=http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}/ks/ks.cfg"
   with_items: "{{ esxi_host }}"
   tags: [ 'esxi_build']
 #- name: Write PXE config
