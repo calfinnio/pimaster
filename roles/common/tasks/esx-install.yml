@@ -12,11 +12,17 @@
 - name: Roate syslog to avoid multiple returns of proxy
   shell: logrotate --force /etc/logrotate.d/rsyslog
   when: production | default(False)
-  
+
+- name: Display all variables/facts known for a host
+  debug:
+    var: "dnsmasq-dhcp*PXE(wlan0)*{{ item.macaddress }} pxelinux.0"
+  with_items: "{{ esxi_host }}"
+
 - name: Wait for PxE offer then sleep
   wait_for:
     path: /var/log/syslog
-    search_regex: "{{ item.macaddress }} pxelinux.0"
+    #search_regex: "{{ item.macaddress }} pxelinux.0"
+    search_regex: "dnsmasq-dhcp*PXE(wlan0)*{{ item.macaddress }} pxelinux.0"
     sleep: 5
   with_items: "{{ esxi_host }}"
   when: production | default(False)
