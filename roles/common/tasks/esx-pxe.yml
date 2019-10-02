@@ -38,7 +38,6 @@
     dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}/boot.cfg"
     regexp: '^(.*)kernelopt(.*)$' 
     line: 'kernelopt=ks=http://{{ ansible_default_ipv4 }}/ks/ks.cfg'
-    backrefs: yes
   with_items: "{{ esxi_host }}"
   tags: [ 'esxi_build']
 #- name: Write PXE config
