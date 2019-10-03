@@ -24,12 +24,12 @@
     regexp: '^(.*)MENU DEFAULT(.*)$' 
     line: "#MENU DEFAULT"
   with_items: "{{ esxi_host }}"
-  tags: [ 'esxi_install']
+  tags: [ 'esxi_install_post']
 
 - name: Add "MENU DEFAULT"
   lineinfile:
     dest: "/opt/tftpboot/pxelinux.cfg/default"
-    line: "MENU DEFAULT"
+    line: "  MENU DEFAULT"
     insertafter: '^(.*)LOCALBOOT 0x80(.*)$'
     state: present
   with_items: "{{ esxi_host }}"

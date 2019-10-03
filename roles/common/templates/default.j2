@@ -4,7 +4,6 @@ NOHALT 1
 PROMPT 0
 TIMEOUT 100
 LABEL esxi{{ item.major_version }}{{ item.minor_version }}
-  # let this boot automatically "MENU DEFAULT"
   MENU DEFAULT
   MENU LABEL ESXi-{{ item.major_version }}{{ item.minor_version }} Installer
   kernel esxi{{ item.major_version }}{{ item.minor_version }}/mboot.c32
