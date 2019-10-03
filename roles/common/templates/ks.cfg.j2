@@ -24,3 +24,7 @@ vim-cmd hostsvc/start_esx_shell
 
 # Suppress ESXi Shell warning
 esxcli system settings advanced set -o /UserVars/SuppressShellWarning -i 1
+cat > /etc/ssh/keys-root/authorized_keys <<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwTeQBmte0iEBo8QpJUE6Y3jjqVKr2T4FlARfOKzmuoouUibyfXmVfvOjVX/HbvuPJMvQi2B+BmPvMMXdKQRk5pdXXZKUNdc60M3LPN6r7ZWWyXpBTF4w4SN2k491pu7dqZYFvD/ZeK5dE3svlZLQtWXAoyzzb+sCzBCk1ppsnQnqXEVXKAlDGjCWS7fQjQqe91RFiuefm3MP6TQncZHkvDE00c2LfOlUobcaA4S8pfvpK5OGPy1bRUNvlmvQ0qRzNCwyKDUUQzGeWDZ/S7EzEWH0vh2HOQN06V7zpcqD5DEKKsTcOjQgxDHChvnd8LORHqU3lhbPEOiTOUbq5alDZ
+
+EOF
