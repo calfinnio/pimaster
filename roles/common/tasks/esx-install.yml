@@ -13,10 +13,27 @@
 
 - command: /bin/ping -c 1 {{ item.ip_addr }}
   register: result
-  retries: 10
-  delay: 10
+  retries: 300
+  delay: 60
   until: result is not failed
-  delegate_to: localhost
+  with_items: "{{ esxi_host }}"
+
+- name: Replace "MENU DEFAULT"
+  lineinfile: 
+    dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}/boot.cfg"
+    regexp: '^(.*)MENU DEFAULT(.*)$' 
+    line: "#MENU DEFAULT"
+  with_items: "{{ esxi_host }}"
+  tags: [ 'esxi_install']
+
+- name: Add "MENU DEFAULT"
+  lineinfile:
+    dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}/boot.cfg"
+    line: "MENU DEFAULT"
+    insertafter: '^(.*)LOCALBOOT 0x80(.*)$'
+    state: present
+  with_items: "{{ esxi_host }}"
+  tags: [ 'esxi_install_post']
 #- name: Rotate dnsmasq.log
 #  shell: logrotate --force /etc/logrotate.d/dnsmasq
 #  tags: [ 'esxi_install']
