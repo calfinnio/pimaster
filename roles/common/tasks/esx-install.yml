@@ -11,19 +11,25 @@
   when: testing | default(False)
   tags: [ 'esxi_install']
 
-- name: Rotate dnsmasq.log
-  shell: logrotate --force /etc/logrotate.d/dnsmasq
-  tags: [ 'esxi_install']
+- command: /bin/ping -c 1 {{ item.ip_addr }}
+  register: result
+  retries: 10
+  delay: 10
+  until: result is not failed
+  delegate_to: localhost
+#- name: Rotate dnsmasq.log
+#  shell: logrotate --force /etc/logrotate.d/dnsmasq
+#  tags: [ 'esxi_install']
 
-- name: Wait for PxE offer then sleep
-  wait_for:
-    path: /var/log/dnsmasq.log
-    search_regex: "{{ item.macaddress }} pxelinux.0"
-    #search_regex: "dnsmasq-dhcp*PXE(wlan0)*{{ item.macaddress }} pxelinux.0"
-    sleep: 5
-  with_items: "{{ esxi_host }}"
-  when: production | default(False)
-  tags: [ 'esxi_install']
+#- name: Wait for PxE offer then sleep
+#  wait_for:
+#    path: /var/log/dnsmasq.log
+#    search_regex: "{{ item.macaddress }} pxelinux.0"
+#    #search_regex: "dnsmasq-dhcp*PXE(wlan0)*{{ item.macaddress }} pxelinux.0"
+#   sleep: 5
+#  with_items: "{{ esxi_host }}"
+#  when: production | default(False)
+#  tags: [ 'esxi_install']
 #- name: replace line
 #  lineinfile: 
 #    dest: /etc/dnsmasq.conf
