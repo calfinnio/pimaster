@@ -13,14 +13,14 @@
 
 - command: /bin/ping -c 1 {{ item.ip_addr }}
   register: result
-  retries: 300
-  delay: 60
+  retries: 600
+  delay: 20
   until: result is not failed
   with_items: "{{ esxi_host }}"
 
 - name: Replace "MENU DEFAULT"
   lineinfile: 
-    dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}/boot.cfg"
+    dest: "/opt/tftpboot/pxelinux.cfg/default"
     regexp: '^(.*)MENU DEFAULT(.*)$' 
     state: absent
   with_items: "{{ esxi_host }}"
@@ -31,7 +31,6 @@
     dest: "/opt/tftpboot/pxelinux.cfg/default"
     line: "  MENU DEFAULT"
     insertafter: '^(.*)LOCALBOOT 0x80(.*)$'
-    state: present
   with_items: "{{ esxi_host }}"
   tags: [ 'esxi_install_post']
 #- name: Rotate dnsmasq.log
