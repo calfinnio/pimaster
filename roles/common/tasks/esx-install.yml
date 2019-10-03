@@ -22,7 +22,7 @@
   lineinfile: 
     dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}/boot.cfg"
     regexp: '^(.*)MENU DEFAULT(.*)$' 
-    line: "#MENU DEFAULT"
+    state: absent
   with_items: "{{ esxi_host }}"
   tags: [ 'esxi_install_post']
 
