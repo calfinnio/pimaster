@@ -13,10 +13,11 @@
 
 - command: /bin/ping -c 1 {{ item.ip_addr }}
   register: result
-  retries: 600
+  retries: 150
   delay: 20
   until: result is not failed
   with_items: "{{ esxi_host }}"
+  tags: [ 'esxi_install']
 
 - name: Replace "MENU DEFAULT"
   lineinfile: 
@@ -33,25 +34,3 @@
     insertafter: '^(.*)LOCALBOOT 0x80(.*)$'
   with_items: "{{ esxi_host }}"
   tags: [ 'esxi_install_post']
-#- name: Rotate dnsmasq.log
-#  shell: logrotate --force /etc/logrotate.d/dnsmasq
-#  tags: [ 'esxi_install']
-
-#- name: Wait for PxE offer then sleep
-#  wait_for:
-#    path: /var/log/dnsmasq.log
-#    search_regex: "{{ item.macaddress }} pxelinux.0"
-#    #search_regex: "dnsmasq-dhcp*PXE(wlan0)*{{ item.macaddress }} pxelinux.0"
-#   sleep: 5
-#  with_items: "{{ esxi_host }}"
-#  when: production | default(False)
-#  tags: [ 'esxi_install']
-#- name: replace line
-#  lineinfile: 
-#    dest: /etc/dnsmasq.conf
-#    regexp: '^(.*)enable-tftp(.*)$' 
-#    line: ''
-#    backrefs: yes
-#  when: 
-#  - testing
-#  - production
