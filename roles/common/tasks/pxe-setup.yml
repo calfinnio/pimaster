@@ -1,4 +1,19 @@
 ---
+- name: Create USB directory for mount
+  file:
+    path: "{{ item.mount_path }}"
+    state: directory
+  with_items: "{{ usb_vars }}"
+  tags: [ 'usb' ]
+
+- name: Mount USB to directory
+  mount:
+    path: "{{ item.mount_path }}"
+    src: /dev/sda
+    state: mounted
+  with_items: "{{ usb_vars }}"
+  tags: [ 'usb' ]
+
 - name: Install Dnsmasq
   package:
     name: dnsmasq
@@ -13,8 +28,9 @@
 
 - name: Creates directory
   file:
-    path: /opt/tftpboot
+    path: "{{ item.tftp_root }}"
     state: directory
+  with_items: "{{ dnsmasq_vars }}"
   tags: [ 'dnsmasq' ]
 
 - name: Set configuration file
@@ -63,8 +79,9 @@
 
 - name: Creates directory
   file:
-    path: /opt/www/html
+    path: "{{ nginx_root }}"
     state: directory
+  with_items: "{{ nginx_vars }}"
   tags: [ 'nginx']
 
 - name: copy nginx configuration file
@@ -95,27 +112,30 @@
 - name: Ansible copy files remote to remote
   copy:
     src: /home/homelab/syslinux-3.86/core/pxelinux.0
-    dest: /opt/tftpboot/
+    dest: "{{ item.tftp_root }}"
     remote_src: yes
+  with_items: "{{ esxi_host }}"
   tags: [ 'pxe']
 
 - name: Ansible copy files remote to remote
   copy:
     src: /home/homelab/syslinux-3.86/com32/menu/vesamenu.c32
-    dest: /opt/tftpboot/
+    dest: "{{ item.tftp_root }}"
     remote_src: yes
+  with_items: "{{ esxi_host }}"
   tags: [ 'pxe']
 
 - name: Create pxelinux.cfg directory
   file:
-    path: /opt/tftpboot/pxelinux.cfg
+    path: "{{ item.tftp_root }}/pxelinux.cfg"
     state: directory
+  with_items: "{{ esxi_host }}"
   tags: [ 'pxe']
 
 - name: Create default config for pxelinux.cfg
   template:
     src: default.j2
-    dest: /opt/tftpboot/pxelinux.cfg/default
+    dest: "{{ item.tftp_root }}/pxelinux.cfg/default"
   with_items: "{{ esxi_host }}"
   tags: [ 'pxe']
 

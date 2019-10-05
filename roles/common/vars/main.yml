@@ -1,11 +1,14 @@
 ---
 ### Users that must be present on the system
+usb_vars:
+  - mount_path: /mnt/usb
+    UUID:
 dnsmasq_vars:
   - log: true
     network_range: 192.168.1.0
     dhcp_proxy: true
     tftp: true
-    tftp_root: /opt/tftpboot
+    tftp_root: /mnt/usb/tftpboot
     pxe_service: 'X86PC,"PXE Boot...",pxelinux'
     dns_enabled: true
     port: 53
@@ -16,7 +19,7 @@ dnsmasq_vars:
 nginx_vars:
   - nginx_service_name: nginx
     nginx_port: 80
-    nginx_root: /opt/www/html
+    nginx_root: /mnt/usb/www/html
 
 esxi_host:
   - hostname: "esx1.houseofbears.co.uk"
@@ -27,5 +30,5 @@ esxi_host:
     ip_nameserver: 192.168.1.1
     major_version: "67"
     minor_version: "u3"
-    tftp_root: /opt/tftpboot/
+    tftp_root: /mnt/usb/tftpboot/
     refresh: true
