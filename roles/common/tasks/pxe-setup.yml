@@ -10,6 +10,7 @@
   mount:
     path: "{{ item.mount_path }}"
     src: /dev/sda
+    fstype: ext4
     state: mounted
   with_items: "{{ usb_vars }}"
   tags: [ 'usb' ]
