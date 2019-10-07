@@ -19,7 +19,7 @@ dnsmasq_vars:
 nginx_vars:
   - nginx_service_name: nginx
     nginx_port: 80
-    nginx_root: /mnt/usb/www/html
+    nginx_root: "/mnt/usb/www/html"
 
 esxi_host:
   - hostname: "esx1.houseofbears.co.uk"
