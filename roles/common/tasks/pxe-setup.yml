@@ -4,7 +4,7 @@
     path: "{{ item.mount_path }}"
     state: directory
   with_items: "{{ usb_vars }}"
-  tags: [ 'usb' ]
+  tags: ["usb"]
 
 - name: Mount USB to directory
   mount:
@@ -13,35 +13,35 @@
     fstype: ext4
     state: mounted
   with_items: "{{ usb_vars }}"
-  tags: [ 'usb' ]
+  tags: ["usb"]
 
 - name: Install Dnsmasq
   package:
     name: dnsmasq
     state: present
-  tags: [ 'dnsmasq' ]
+  tags: ["dnsmasq"]
 
 - name: Install syslinux-common
   package:
     name: syslinux-common
     state: present
-  tags: [ 'dnsmasq' ]
+  tags: ["dnsmasq"]
 
 - name: Creates directory
   file:
     path: "{{ item.tftp_root }}"
     state: directory
   with_items: "{{ dnsmasq_vars }}"
-  tags: [ 'dnsmasq' ]
+  tags: ["dnsmasq"]
 
 - name: Set configuration file
   template:
     src: etc_dnsmasq.conf.j2
     dest: /etc/dnsmasq.conf
-    validate: 'dnsmasq --test --conf-file=%s'
+    validate: "dnsmasq --test --conf-file=%s"
   with_items: "{{ dnsmasq_vars }}"
   notify: restart_dnsmasq
-  tags: [ 'dnsmasq' ]
+  tags: ["dnsmasq"]
 
 - name: Creates static hosts file
   file:
@@ -49,41 +49,41 @@
     state: touch
   with_items: "{{ dnsmasq_vars }}"
   notify: restart_dnsmasq
-  tags: [ 'dnsmasq' ]
+  tags: ["dnsmasq"]
 
 - name: Create logrotate file for DHCP logs
   template:
     src: dnsmasq_logrotate.j2
     dest: /etc/logrotate.d/dnsmasq
   notify: restart_dnsmasq
-  tags: [ 'dnsmasq' ]
+  tags: ["dnsmasq"]
 
 - name: Make sure Dnsmasq is running
   service:
     name: dnsmasq
     state: started
     enabled: yes
-  tags: [ 'dnsmasq' ]
+  tags: ["dnsmasq"]
 
 - name: create users
   user: name=nginx
-        uid=1010
-        state=present
-        shell=/bin/bash
-  tags: [ 'nginx']
+    uid=1010
+    state=present
+    shell=/bin/bash
+  tags: ["nginx"]
 
 - name: Install nginx
   package:
     name: nginx
     state: present
-  tags: [ 'nginx' ]
+  tags: ["nginx"]
 
 - name: Creates directory
   file:
-    path: "{{ nginx_root }}"
+    path: "{{ item.nginx_root }}"
     state: directory
   with_items: "{{ nginx_vars }}"
-  tags: [ 'nginx']
+  tags: ["nginx"]
 
 - name: copy nginx configuration file
   template:
@@ -94,21 +94,21 @@
     mode: u=rw,g=r,o=r
   with_items: "{{ nginx_vars }}"
   notify: restart_nginx
-  tags: [ 'nginx']
+  tags: ["nginx"]
 
 - name: download syslinux
-  get_url: 
+  get_url:
     url: https://www.kernel.org/pub/linux/utils/boot/syslinux/3.xx/syslinux-3.86.tar.gz
     dest: /home/homelab/syslinux-3.86.tar.gz
     checksum: sha256:c5fb189978d1a2d2041cc69a2956981e305ecd5cb9ce03f589d3fd1f1c434038
-  tags: [ 'pxe']
+  tags: ["pxe"]
 
 - name: Unarchive syslinux
   unarchive:
     src: /home/homelab/syslinux-3.86.tar.gz
     dest: /home/homelab/
     remote_src: yes
-  tags: [ 'pxe']
+  tags: ["pxe"]
 
 - name: Ansible copy files remote to remote
   copy:
@@ -116,7 +116,7 @@
     dest: "{{ item.tftp_root }}"
     remote_src: yes
   with_items: "{{ esxi_host }}"
-  tags: [ 'pxe']
+  tags: ["pxe"]
 
 - name: Ansible copy files remote to remote
   copy:
@@ -124,24 +124,24 @@
     dest: "{{ item.tftp_root }}"
     remote_src: yes
   with_items: "{{ esxi_host }}"
-  tags: [ 'pxe']
+  tags: ["pxe"]
 
 - name: Create pxelinux.cfg directory
   file:
     path: "{{ item.tftp_root }}/pxelinux.cfg"
     state: directory
   with_items: "{{ esxi_host }}"
-  tags: [ 'pxe']
+  tags: ["pxe"]
 
 - name: Create default config for pxelinux.cfg
   template:
     src: default.j2
     dest: "{{ item.tftp_root }}/pxelinux.cfg/default"
   with_items: "{{ esxi_host }}"
-  tags: [ 'pxe']
+  tags: ["pxe"]
 
 - name: Install Wake-On-Lan
   package:
     name: wakeonlan
     state: present
-  tags: [ 'wol' ]
+  tags: ["wol"]
