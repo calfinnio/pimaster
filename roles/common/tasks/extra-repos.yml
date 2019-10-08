@@ -10,4 +10,6 @@
   git:
     repo: git@github.com:serokles/pimaster-esxiconfig.git
     dest: /home/homelab/pimaster/
+    accept_hostkey: yes
+  become: no
   tags: [ 'git_repos']   
