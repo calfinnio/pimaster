@@ -4,10 +4,10 @@
   file:
     path: ~/pimaster
     state: directory
-  tags: [ 'git repos']
+  tags: [ 'git_repos']
 
 - name: Git clone repo
   command:
   args:
     chdir: ~/pimaster
-  tags: [ 'git repos']   
+  tags: [ 'git_repos']   
