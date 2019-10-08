@@ -6,6 +6,8 @@
     state: directory
   tags: [ 'git_repos']
 
+- name: Debug whoami
+  command: whoami
 - name: Git clone repo
   git:
     repo: git@github.com:serokles/pimaster-esxiconfig.git
