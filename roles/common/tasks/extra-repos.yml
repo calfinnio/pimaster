@@ -7,7 +7,7 @@
   tags: [ 'git_repos']
 
 - name: Git clone repo
-  command: git clone git@github.com:serokles/pimaster-esxiconfig.git
-  args:
-    chdir: ~/pimaster
+  git:
+    repo: git@github.com:serokles/pimaster-esxiconfig.git
+    dest: ~/pimaster/
   tags: [ 'git_repos']   
