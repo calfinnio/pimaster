@@ -3,3 +3,4 @@
 - include: pxe-setup.yml
 - include: esx-pxe.yml
 - include: esx-install.yml
+- include: extra-packages.yml

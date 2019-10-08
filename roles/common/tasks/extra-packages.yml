@@ -1,0 +1,16 @@
+---
+- name: Install git
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - git
+  tags: ["git"]
+
+- name: Install ansible
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - ansible
+  tags: ["ansible"]
