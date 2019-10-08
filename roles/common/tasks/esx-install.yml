@@ -21,7 +21,7 @@
 
 - name: Replace "MENU DEFAULT"
   lineinfile: 
-    dest: "/opt/tftpboot/pxelinux.cfg/default"
+    dest: "{{ item.tftp_root }}pxelinux.cfg/default"
     regexp: '^(.*)MENU DEFAULT(.*)$' 
     state: absent
   with_items: "{{ esxi_host }}"
@@ -29,7 +29,7 @@
 
 - name: Add "MENU DEFAULT"
   lineinfile:
-    dest: "/opt/tftpboot/pxelinux.cfg/default"
+    dest: "{{ item.tftp_root }}pxelinux.cfg/default"
     line: "  MENU DEFAULT"
     insertafter: '^(.*)LOCALBOOT 0x80(.*)$'
   with_items: "{{ esxi_host }}"
