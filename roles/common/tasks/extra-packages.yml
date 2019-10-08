@@ -5,7 +5,7 @@
   vars:
     packages:
     - git
-  tags: ["git"]
+  tags: ["git", "extra_packages"]
 
 - name: Install ansible
   apt:
@@ -13,4 +13,4 @@
   vars:
     packages:
     - ansible
-  tags: ["ansible"]
+  tags: ["ansible", "extra_packages"]
