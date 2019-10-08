@@ -5,11 +5,8 @@
     path: /home/homelab/pimaster
     state: directory
     owner: homelab
-    group: homelab
+    group: users
   tags: [ 'git_repos']
-
-- name: Debug whoami
-  command: whoami
 
 - name: Git clone repo
   git:

@@ -20,6 +20,20 @@
   with_items: "{{ create_users }}"
   tags: [ 'users' ]
 
+- name: Copy files from local to PiMaster
+  copy:
+    src: "/home/homelab/.ssh/id_rsa.pub"
+    dest: "home/homelab/.ssh/id_rsa.pub"
+    force: no
+  tags: [ 'users']
+
+- name: Copy files from local to PiMaster
+  copy:
+    src: "/home/homelab/.ssh/id_rsa"
+    dest: "home/homelab/.ssh/id_rsa"
+    force: no
+  tags: [ 'users']
+
 - name: Add homelab user to the sudoers
   copy:
       dest: "/etc/sudoers.d/homelab"
