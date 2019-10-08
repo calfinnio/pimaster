@@ -37,3 +37,4 @@ esxi_host:
 
 nfs_vars:
   - nfs_root: /mnt/usb/nfs
+    ip_addr: 192.168.1.11
