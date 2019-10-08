@@ -2,12 +2,12 @@
 
 - name: Create project directory
   file:
-    path: ~/pimaster
+    path: /home/homelab/pimaster
     state: directory
   tags: [ 'git_repos']
 
 - name: Git clone repo
   git:
     repo: git@github.com:serokles/pimaster-esxiconfig.git
-    dest: ~/pimaster/
+    dest: /home/homelab/pimaster/
   tags: [ 'git_repos']   
