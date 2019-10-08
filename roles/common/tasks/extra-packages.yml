@@ -7,7 +7,7 @@
     - git
   tags: ["git", "extra_packages"]
 
-- name: Install ansible
+- name: Instaall ansible
   apt:
     name: "{{ packages }}"
   vars:
