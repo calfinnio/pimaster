@@ -1,0 +1,13 @@
+---
+
+- name: Create project directory
+  file:
+    path: ~/pimaster
+    state: directory
+  tags: [ 'git repos']
+
+- name: Git clone repo
+  command:
+  args:
+    chdir: ~/pimaster
+  tags: [ 'git repos']   
