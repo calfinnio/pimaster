@@ -168,6 +168,7 @@
     dest: /etc/exports
     owner: root
     group: root
+  with_items: "{{ nfs_vars }}"
   tags: ["nfs"]
 
 - name: restart nfs server
