@@ -184,3 +184,11 @@
     packages:
     - git
   tags: ["git"]
+
+- name: Install ansible
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - ansible
+  tags: ["ansible"]
