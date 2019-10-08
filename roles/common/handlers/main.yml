@@ -7,3 +7,9 @@
   service:
    name: nginx
    state: restarted
+- name: reload exports
+  command: exportfs -r
+- name: ensure nfs service is running
+  service: 
+    name: nfs-kernel-server
+    state: started

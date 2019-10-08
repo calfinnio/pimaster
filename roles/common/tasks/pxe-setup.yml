@@ -145,3 +145,33 @@
     name: wakeonlan
     state: present
   tags: ["wol"]
+
+- name: Creates directory
+  file:
+    path: "{{ item.nfs_root }}"
+    state: directory
+  with_items: "{{ nfs_vars }}"
+  tags: ["nfs"]
+
+- name: Install NFS-Common packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - nfs-common
+    - nfs-kernel-server
+  tags: ["nfs"]
+
+- name: copy /etc/exports
+  template: 
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+  tags: ["nfs"]
+
+- name: restart nfs server
+  service: 
+    name: nfs-kernel-server
+    state: restarted
+  tags: ["nfs"]

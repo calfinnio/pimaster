@@ -3,6 +3,7 @@
 usb_vars:
   - mount_path: /mnt/usb
     UUID:
+
 dnsmasq_vars:
   - log: true
     network_range: 192.168.1.0
@@ -33,3 +34,6 @@ esxi_host:
     tftp_root: /mnt/usb/tftpboot/
     refresh: true
     nginx_root: "/mnt/usb/www/html"
+
+nfs_vars:
+  - nfs_root: /mnt/usb/nfs
