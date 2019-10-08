@@ -32,3 +32,4 @@ esxi_host:
     minor_version: "u3"
     tftp_root: /mnt/usb/tftpboot/
     refresh: true
+    nginx_root: "/mnt/usb/www/html"

@@ -24,18 +24,14 @@
   file:
     path: "{{ item.nginx_root }}/ks"
     state: directory
-  with_items: 
-    - "{{ esxi_host }}"
-    - "{{ nginx_vars }}"
+  with_items: "{{ esxi_host }}"
   tags: [ 'esxi_build']
 
 - name: Create ks file for automated install
   template:
     src: ks.cfg.j2
     dest: "{{ item.nginx_root }}/ks/ks.cfg"
-  with_items: 
-    - "{{ esxi_host }}"
-    - "{{ nginx_vars }}"
+  with_items: "{{ esxi_host }}"
   tags: [ 'esxi_build']
 
 - name: replace line
