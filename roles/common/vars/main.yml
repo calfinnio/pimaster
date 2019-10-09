@@ -1,6 +1,6 @@
 ---
 ### Users that must be present on the system
-- include: dns_entries.yml
+#include: dns_entries.yml
 usb_vars:
   - mount_path: /mnt/usb
     UUID:
@@ -39,3 +39,7 @@ esxi_host:
 nfs_vars:
   - nfs_root: /mnt/usb/nfs
     ip_addr: 192.168.1.11
+
+dns_entries:
+  - 192.168.1.44 pimaster.houseofbears.co.uk
+  - 192.168.1.11 esx1.houseofbears.co.uk

@@ -2,7 +2,7 @@
 - name: Add pimaster DNS entry
   lineinfile: 
     dest: "/etc/dnsmasq_static_hosts.conf"
-    line: "{{ item.* }}"
+    line: "{{ item }}"
     state: present
-  with_items: "{{ dns_entries }}"
+  loop: "{{ dns_entries }}"
   tags: [ 'dns_entries']
