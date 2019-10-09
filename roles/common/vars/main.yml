@@ -43,3 +43,5 @@ nfs_vars:
 dns_entries:
   - 192.168.1.44 pimaster.houseofbears.co.uk
   - 192.168.1.11 esx1.houseofbears.co.uk
+  - 192.168.1.12 pfsense.houseofbears.co.uk
+  - 10.64.1.20 vcsa.houseofbears.co.uk
