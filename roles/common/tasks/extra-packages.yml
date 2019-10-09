@@ -42,7 +42,7 @@
 
 - name: Execute mod file
   file:
-    path: "{{ item.path | basename }}"
+    path: "{{ item.path }}"
     state: file
     mode: "u+x,g+x,o+x"  
   with_items: "{{ find_result.files }}"
