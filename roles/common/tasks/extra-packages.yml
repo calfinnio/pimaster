@@ -14,3 +14,11 @@
     packages:
     - ansible
   tags: ["ansible", "extra_packages"]
+
+- name: Instaall dnsutils
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - dnsutils
+  tags: ["dnsutils", "extra_packages"]
