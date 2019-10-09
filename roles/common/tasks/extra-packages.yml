@@ -35,6 +35,8 @@
     paths: /mnt/usb/ovftool/
     file_type: "file"
     patterns: "*"
+  debug:
+    var: find_result
   register: find_result
   tags: ["ovftool", "extra_packages"]
 
