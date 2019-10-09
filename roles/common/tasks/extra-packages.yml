@@ -41,7 +41,7 @@
     var: find_result
 
 - name: Execute mod file
-  shell: chmod +x <file_name> {{ item.path | basename }}
+  shell: chmod +x {{ item.path | basename }}
   run_once: true
   with_items: "{{ find_result.files }}"
   tags: ["ovftool", "extra_packages"]
