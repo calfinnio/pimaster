@@ -26,7 +26,7 @@
 - name: Copy ovftool
   copy:
     src: "{{ role_path }}/files/ovftool/"
-    dest: "/mnt/ovftool"
+    dest: "/mnt/usb/ovftool"
     force: no
   tags: ["ovftool", "extra_packages"]
 
