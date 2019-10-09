@@ -22,3 +22,16 @@
     packages:
     - dnsutils
   tags: ["dnsutils", "extra_packages"]
+
+- name: Copy ovftool
+  copy:
+    src: "{{ role_path }}/files/ovftool/"
+    dest: "/opt/ovftool"
+    force: no
+  tags: ["ovftool", "extra_packages"]
+
+- name: Make bundle executable
+  file: 
+    dest: /opt/ovftool/*
+    mode: a+x
+  tags: ["ovftool", "extra_packages"]
