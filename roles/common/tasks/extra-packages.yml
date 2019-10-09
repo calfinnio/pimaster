@@ -26,12 +26,18 @@
 - name: Copy ovftool
   copy:
     src: "{{ role_path }}/files/ovftool/"
-    dest: "/opt/ovftool"
+    dest: "/mnt/ovftool"
     force: no
   tags: ["ovftool", "extra_packages"]
 
-- name: Make bundle executable
-  file: 
-    dest: /opt/ovftool/*
-    mode: a+x
+- name: get files
+  find:
+    paths: /mnt/usb/ovftool
+    file_type: "file"
+  register: find_result
+
+- name: Execute mod file
+  shell: chmod +x <file_name> {{ item.path | basename }}
+  run_once: true
+  with_items: "{{ find_result.files }}"
   tags: ["ovftool", "extra_packages"]
