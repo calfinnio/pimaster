@@ -5,3 +5,4 @@
 - include: esx-install.yml
 - include: extra-packages.yml
 - include: extra-repos.yml
+- include: add-dns-entries.yml

@@ -1,0 +1,5 @@
+---
+dns_entries:
+  - pimaster: 192.168.1.44 pimaster.houseofbears.co.uk
+    esx1: 192.168.1.11 esx1.houseofbears.co.uk
+  

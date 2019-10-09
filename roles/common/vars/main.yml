@@ -1,5 +1,6 @@
 ---
 ### Users that must be present on the system
+- include: dns_entries.yml
 usb_vars:
   - mount_path: /mnt/usb
     UUID:
