@@ -51,6 +51,6 @@
 - name: Copy ovftool
   copy:
     src: "/usr/lib/vmware-ovftool"
-    dest: "/mnt/usb/ovftool"
+    dest: "/mnt/usb/nfs/"
     force: no
   tags: ["ovftool", "extra_packages"]
