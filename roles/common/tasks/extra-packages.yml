@@ -54,3 +54,10 @@
     dest: "/mnt/usb/nfs/"
     force: no
   tags: ["ovftool", "extra_packages"]
+
+- name: Replace "shebang"
+  lineinfile: 
+    dest: "/mnt/usb/nfs/vmware-ovftool/ovftool"
+    regexp: '^(.*)#!/bin/bash(.*)$' 
+    line: '#!/bin/sh'
+  tags: ["ovftool2"]
