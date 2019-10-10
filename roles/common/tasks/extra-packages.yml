@@ -30,24 +30,6 @@
 #    force: no
 #  tags: ["ovftool", "extra_packages"]
 
-#- name: find the file we just copied without knowing the name
-#  find:
-#    paths: /mnt/usb/ovftool/
-#    file_type: "file"
-#    patterns: "*"
-#  register: find_result
-#  tags: ["ovftool", "extra_packages"]
-#- debug:
-#    var: find_result
-
-#- name: Add execute permission to file
-#  file:
-#    path: "{{ item.path }}"
-#    state: file
-#    mode: "u+x,g+x,o+x"  
-#  with_items: "{{ find_result.files }}"
-#  tags: ["ovftool", "extra_packages"]
-
 - name: Copy ovftool
   copy:
     src: "/usr/lib/vmware-ovftool"
@@ -61,3 +43,21 @@
     regexp: '^(.*)#!/bin/bash(.*)$' 
     line: '#!/bin/sh'
   tags: ["ovftool2"]
+
+- name: find the file we just copied without knowing the name
+  find:
+    paths: /mnt/usb/nfs/vmware-ovftool/
+    file_type: "file"
+    patterns: "ovftool*"
+  register: find_result
+  tags: ["ovftool2", "extra_packages"]
+- debug:
+    var: find_result
+
+- name: Add execute permission to file
+  file:
+    path: "{{ item.path }}"
+    state: file
+    mode: "u+x,g+x,o+x"  
+  with_items: "{{ find_result.files }}"
+  tags: ["ovftool2", "extra_packages"]
