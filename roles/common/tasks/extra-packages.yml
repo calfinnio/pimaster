@@ -42,7 +42,7 @@
     dest: "/mnt/usb/nfs/vmware-ovftool/ovftool"
     regexp: '^(.*)#!/bin/bash(.*)$' 
     line: '#!/bin/sh'
-  tags: ["ovftool2"]
+  tags: ["ovftool"]
 
 - name: find the file we just copied without knowing the name
   find:
@@ -50,7 +50,7 @@
     file_type: "file"
     patterns: "ovftool*"
   register: find_result
-  tags: ["ovftool2", "extra_packages"]
+  tags: ["ovftool", "extra_packages"]
 - debug:
     var: find_result
 
@@ -60,4 +60,4 @@
     state: file
     mode: "u+x,g+x,o+x"  
   with_items: "{{ find_result.files }}"
-  tags: ["ovftool2", "extra_packages"]
+  tags: ["ovftool", "extra_packages"]
