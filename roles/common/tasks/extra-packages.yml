@@ -23,27 +23,34 @@
     - dnsutils
   tags: ["dnsutils", "extra_packages"]
 
+#- name: Copy ovftool
+#  copy:
+#    src: "{{ role_path }}/files/ovftool/"
+#    dest: "/mnt/usb/ovftool"
+#    force: no
+#  tags: ["ovftool", "extra_packages"]
+
+#- name: find the file we just copied without knowing the name
+#  find:
+#    paths: /mnt/usb/ovftool/
+#    file_type: "file"
+#    patterns: "*"
+#  register: find_result
+#  tags: ["ovftool", "extra_packages"]
+#- debug:
+#    var: find_result
+
+#- name: Add execute permission to file
+#  file:
+#    path: "{{ item.path }}"
+#    state: file
+#    mode: "u+x,g+x,o+x"  
+#  with_items: "{{ find_result.files }}"
+#  tags: ["ovftool", "extra_packages"]
+
 - name: Copy ovftool
   copy:
-    src: "{{ role_path }}/files/ovftool/"
+    src: "/usr/lib/vmware-ovftool"
     dest: "/mnt/usb/ovftool"
     force: no
-  tags: ["ovftool", "extra_packages"]
-
-- name: get files
-  find:
-    paths: /mnt/usb/ovftool/
-    file_type: "file"
-    patterns: "*"
-  register: find_result
-  tags: ["ovftool", "extra_packages"]
-- debug:
-    var: find_result
-
-- name: Execute mod file
-  file:
-    path: "{{ item.path }}"
-    state: file
-    mode: "u+x,g+x,o+x"  
-  with_items: "{{ find_result.files }}"
   tags: ["ovftool", "extra_packages"]
