@@ -4,7 +4,8 @@
 {% if item.dns_enabled is sameas true %}
 domain-needed
 bogus-priv
-no-resolv
+#Removed below line to allow reading of statichosts file
+#no-resolv
 no-poll
 server={{ item.dns_upstream }}
 local=/{{ item.dns_domainname }}/
