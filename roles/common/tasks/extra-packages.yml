@@ -61,3 +61,31 @@
     mode: "u+x,g+x,o+x"  
   with_items: "{{ find_result.files }}"
   tags: ["ovftool", "extra_packages"]
+
+- name: Create iso dir
+  file:
+    path: /mnt/usb/vcsa_iso
+    state: directory
+  tags: ["vcsa", "extra_packages"]
+
+- name: Copy vcsa iso
+  copy:
+    src: "{{ role_path }}/files/vcsa/"
+    dest: "/mnt/usb/nfs/vcsa"
+    force: no
+  tags: ["vcsa", "extra_packages"]
+
+- name: find the file we just copied without knowing the name
+  find:
+    paths: /mnt/usb/nfs/vcsa/
+    file_type: "file"
+    patterns: "*iso"
+  register: find_result
+  tags: ["vcsa", "extra_packages"]
+- debug:
+    var: find_result
+
+- name: Mount iso
+  command: "mount -o loop {{ item.path }} /mnt/usb/vcsa_iso"
+  with_items: "{{ find_result.files }}"
+  tags: ["vcsa", "extra_packages"]
