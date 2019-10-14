@@ -7,7 +7,7 @@
     - git
   tags: ["git", "extra_packages"]
 
-- name: Instaall ansible
+- name: Install ansible
   apt:
     name: "{{ packages }}"
   vars:
@@ -15,7 +15,7 @@
     - ansible
   tags: ["ansible", "extra_packages"]
 
-- name: Instaall dnsutils
+- name: Install dnsutils
   apt:
     name: "{{ packages }}"
   vars:
@@ -23,6 +23,43 @@
     - dnsutils
   tags: ["dnsutils", "extra_packages"]
 
+- name: Install golang, jq
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - golang
+    - jq
+  tags: ["golang", "extra_packages"]
+
+- name: Create go dir
+  file:
+    path: "{{ ansible_env.HOME }}/go"
+    state: directory
+  tags: ["golang", "extra_packages"]
+
+- name: check go version
+  command: go version
+  register: result
+  changed_when: no
+  ignore_errors: true
+  tags: ["golang", "extra_packages"]
+
+- name: Set GOPATH
+  set_fact:
+    go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
+  when: not result|failed
+  tags: ["golang", "extra_packages"]
+
+- name: go get gogs
+  shell: go get -u github.com/gogits/gogs
+  environment:
+    GOPATH: "{{ go_path }}"
+  register: gogs
+  when: not result|failed
+  tags: ["golang", "extra_packages"]
+
+  
 #- name: Copy ovftool
 #  copy:
 #    src: "{{ role_path }}/files/ovftool/"

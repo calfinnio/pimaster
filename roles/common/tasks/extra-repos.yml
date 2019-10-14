@@ -14,4 +14,4 @@
     dest: /home/homelab/pimaster/
     accept_hostkey: yes
   become: no
-  tags: [ 'git_repos']   
+  tags: [ 'git_repos']  
