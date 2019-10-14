@@ -38,7 +38,8 @@ esxi_host:
 
 nfs_vars:
   - nfs_root: /mnt/usb/nfs
-    ip_addr: 192.168.1.11
+    esx_ip_addr: 192.168.1.11
+    pfsense_ip_addr: 192.168.1.12
 
 dns_entries:
   - 192.168.1.44 pimaster.houseofbears.co.uk
