@@ -36,6 +36,7 @@
   file:
     path: "{{ ansible_env.HOME }}/go"
     state: directory
+  become: no
   tags: ["golang", "extra_packages"]
 
 - name: check go version
@@ -43,12 +44,14 @@
   register: result
   changed_when: no
   ignore_errors: true
+  become: no
   tags: ["golang", "extra_packages"]
 
 - name: Set GOPATH
   set_fact:
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
   when: not result|failed
+  become: no
   tags: ["golang", "extra_packages"]
 
 - name: go get gogs
@@ -57,6 +60,7 @@
     GOPATH: "{{ go_path }}"
   register: gogs
   when: not result|failed
+  become: no
   tags: ["golang", "extra_packages"]
 
   
