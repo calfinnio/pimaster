@@ -37,6 +37,7 @@
     path: "{{ ansible_env.HOME }}/go"
     state: directory
   become: no
+  become_user: homelab
   tags: ["golang", "extra_packages"]
 
 - name: check go version
@@ -45,6 +46,7 @@
   changed_when: no
   ignore_errors: true
   become: no
+  become_user: homelab
   tags: ["golang", "extra_packages"]
 
 - name: Set GOPATH
@@ -52,6 +54,7 @@
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
   when: not result|failed
   become: no
+  become_user: homelab
   tags: ["golang", "extra_packages"]
 
 - name: go get gogs
@@ -61,6 +64,7 @@
   register: gogs
   when: not result|failed
   become: no
+  become_user: homelab
   tags: ["golang", "extra_packages"]
 
   
