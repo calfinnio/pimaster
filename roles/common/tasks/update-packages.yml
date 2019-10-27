@@ -2,19 +2,26 @@
 
 - name: updates a server
   apt: update_cache=yes
+  become: yes
   tags: [ 'patchhost' ]
+
 - name: upgrade a server
   apt: upgrade=full
+  become: yes
   tags: [ 'patchhost' ]
+
 - name: restart system to reboot to newest kernel
   shell: "sleep 5 && reboot"
   async: 1
   poll: 0
+  become: yes
   tags: [ 'patchhost' ]
+
 - name: wait for 10 seconds
   pause:
     seconds: 10
   tags: [ 'patchhost' ]
+
 - name: wait for the system to reboot
   wait_for_connection:
     connect_timeout: 20
