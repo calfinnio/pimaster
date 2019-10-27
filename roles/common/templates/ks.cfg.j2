@@ -10,7 +10,7 @@ install --firstdisk=usb --overwritevmfs --novmfsondisk
 reboot
 
 network --bootproto=static --ip={{ item.ip_addr }} --netmask={{ item.ip_subnetmask }} --gateway={{ item.ip_gateway }} --hostname={{ item.hostname }} --nameserver={{ item.ip_nameserver }} --addvmportgroup=1
-rootpw VMware1!
+rootpw {{ item.root_passwd }}
 
 %firstboot --interpreter=busybox
 

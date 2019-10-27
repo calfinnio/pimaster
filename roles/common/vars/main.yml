@@ -25,6 +25,7 @@ nginx_vars:
 
 esxi_host:
   - hostname: "esx1.houseofbears.co.uk"
+    root_passwd: "VMware1!"
     macaddress: 34:17:eb:ba:2c:c1
     ip_addr: 192.168.1.11
     ip_subnetmask: 255.255.255.0
