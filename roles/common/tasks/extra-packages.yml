@@ -86,7 +86,7 @@
   tags: ["golang", "extra_packages"]
 
 - name: govc test
-  shell: govc
+  shell: govc version
   environment:
     GOPATH: "{{ go_path }}"
     PATH: "{{ go_bin }}"
