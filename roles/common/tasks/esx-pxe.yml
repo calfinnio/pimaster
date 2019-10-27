@@ -28,7 +28,7 @@
   tags: [ 'esxi_build']
 
 - name: Get SSH Key 
-  shell: cat .ssh/id_rsa.pub | awk '{split($0,a," "); print a[2]}'
+  shell: cat {{ ansible_env.HOME }}/.ssh/id_rsa.pub | awk '{split($0,a," "); print a[2]}'
   register: ssh_key_var
   tags: ['ssh_key_ks','esxi_build']
 
