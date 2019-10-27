@@ -180,4 +180,5 @@
   service: 
     name: nfs-kernel-server
     state: restarted
+  become: yes
   tags: ["nfs"]

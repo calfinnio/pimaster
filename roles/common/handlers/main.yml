@@ -9,6 +9,7 @@
    state: restarted
 - name: reload exports
   command: exportfs -r
+  become: yes
 - name: ensure nfs service is running
   service: 
     name: nfs-kernel-server
