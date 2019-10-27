@@ -40,7 +40,7 @@
 - debug:
     msg: "{{ user_info }}"
   tags: ["golang"]
-  
+
 - name: Create go dir
   file:
     path: "{{ ansible_env.HOME }}/go"
@@ -144,5 +144,5 @@
   with_items: "{{ find_result.files }}"
   tags: ["vcsa", "extra_packages"]
 
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-PS /home/homelab> Install-Module -Name VMware.PowerCLI -Scope CurrentUser
+#Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+#PS /home/homelab> Install-Module -Name VMware.PowerCLI -Scope CurrentUser
