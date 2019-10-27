@@ -66,7 +66,7 @@
   #become_user: homelab
   tags: ["golang", "extra_packages"]
 
-- name: go get gogs
+- name: go get govc
   shell: go get -u github.com/vmware/govmomi/govc
   environment:
     GOPATH: "{{ go_path }}"
@@ -76,6 +76,15 @@
   #become_user: homelab
   tags: ["golang", "extra_packages"]
 
+- name: go install govc
+  shell: go install github.com/vmware/govmomi/govc
+  environment:
+    GOPATH: "{{ go_path }}"
+  register: gogs
+  when: not result|failed
+  #become: no
+  #become_user: homelab
+  tags: ["golang", "extra_packages"]
   
 #- name: Copy ovftool
 #  copy:
