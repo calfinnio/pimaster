@@ -32,12 +32,21 @@
     - jq
   tags: ["golang", "extra_packages"]
 
+- name:
+    shell: whoami
+    register: user_info
+  tags: ["golang"]
+
+- debug:
+    msg: "{{ user_info }}"
+  tags: ["golang"]
+  
 - name: Create go dir
   file:
     path: "{{ ansible_env.HOME }}/go"
     state: directory
   become: no
-  become_user: homelab
+  become_user: homelab  
   tags: ["golang", "extra_packages"]
 
 - name: check go version
@@ -134,3 +143,6 @@
   command: "mount -o loop {{ item.path }} /mnt/usb/vcsa_iso"
   with_items: "{{ find_result.files }}"
   tags: ["vcsa", "extra_packages"]
+
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+PS /home/homelab> Install-Module -Name VMware.PowerCLI -Scope CurrentUser
