@@ -32,9 +32,9 @@
     - jq
   tags: ["golang", "extra_packages"]
 
-- name:
-    shell: whoami
-    register: user_info
+- name: whomai for debug
+  shell: whoami
+  register: user_info
   tags: ["golang"]
 
 - debug:
@@ -145,4 +145,4 @@
   tags: ["vcsa", "extra_packages"]
 
 #Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-#PS /home/homelab> Install-Module -Name VMware.PowerCLI -Scope CurrentUser
+# PS /home/homelab> Install-Module -Name VMware.PowerCLI -Scope CurrentUser
