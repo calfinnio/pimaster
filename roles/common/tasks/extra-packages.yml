@@ -45,8 +45,8 @@
   file:
     path: "{{ ansible_env.HOME }}/go"
     state: directory
-  become: no
-  become_user: homelab  
+  #become: no
+  #become_user: homelab  
   tags: ["golang", "extra_packages"]
 
 - name: check go version
@@ -54,32 +54,32 @@
   register: result
   changed_when: no
   ignore_errors: true
-  become: no
-  become_user: homelab
+  #become: no
+  #become_user: homelab
   tags: ["golang", "extra_packages"]
 
 - name: Set GOPATH
   set_fact:
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
   when: not result|failed
-  become: no
-  become_user: homelab
+  #become: no
+  #become_user: homelab
   tags: ["golang", "extra_packages"]
 
 - name: go get gogs
-  shell: go get -u github.com/gogits/gogs
+  shell: go get -u github.com/vmware/govmomi/govc
   environment:
     GOPATH: "{{ go_path }}"
   register: gogs
   when: not result|failed
-  become: no
-  become_user: homelab
+  #become: no
+  #become_user: homelab
   tags: ["golang", "extra_packages"]
 
   
 #- name: Copy ovftool
 #  copy:
-#    src: "{{ role_path }}/files/ovftool/"
+#  `  src: "{{ role_path }}/files/ovftool/"
 #    dest: "/mnt/usb/ovftool"
 #    force: no
 #  tags: ["ovftool", "extra_packages"]

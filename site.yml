@@ -1,7 +1,7 @@
 ---
 - hosts: all
-  remote_user: homelab
-  become: True
+  #remote_user: homelab
+  #become: True
   gather_facts: True
   roles:
     - common
