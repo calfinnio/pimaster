@@ -27,6 +27,16 @@
   with_items: "{{ esxi_host }}"
   tags: [ 'esxi_build']
 
+- name: Get SSH Key 
+  shell: cat .ssh/id_rsa.pub | awk '{split($0,a," "); print a[2]}'
+  register: ssh_key_var
+  tags: ['ssh_key_ks','esxi_build']
+
+- name: Set SSH pub key variable
+  set_fact:
+    ssh_pub_key: "{{ ssh_key_var }}"
+  tags: ['ssh_key_ks','esxi_build']
+
 - name: Create ks file for automated install
   template:
     src: ks.cfg.j2
