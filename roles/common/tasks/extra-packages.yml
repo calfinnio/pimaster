@@ -61,7 +61,7 @@
 - name: Set GOPATH
   set_fact:
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
-    go_bin: "{{ go_path }}/bin/"
+    go_bin: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go/bin/', true) }}"
   when: not result|failed
   #become: no
   #become_user: homelab
