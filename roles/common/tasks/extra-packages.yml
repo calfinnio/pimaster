@@ -61,6 +61,7 @@
 - name: Set GOPATH
   set_fact:
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
+    go_bin: "{{ go_path }}/bin/"
   when: not result|failed
   #become: no
   #become_user: homelab
@@ -70,7 +71,6 @@
   shell: go get -u github.com/vmware/govmomi/govc
   environment:
     GOPATH: "{{ go_path }}"
-  register: gogs
   when: not result|failed
   #become: no
   #become_user: homelab
@@ -80,12 +80,24 @@
   shell: go install github.com/vmware/govmomi/govc
   environment:
     GOPATH: "{{ go_path }}"
-  register: gogs
   when: not result|failed
   #become: no
   #become_user: homelab
   tags: ["golang", "extra_packages"]
-  
+
+- name: govc test
+  shell: govc
+  environment:
+    GOPATH: "{{ go_path }}"
+    PATH: "{{ go_bin }}"
+  register: govc_result
+  when: not result|failed
+  #become: no
+  #become_user: homelab
+  tags: ["golang", "extra_packages"] 
+
+- debug:
+  msg: "{{ govc_result }}"
 #- name: Copy ovftool
 #  copy:
 #  `  src: "{{ role_path }}/files/ovftool/"
