@@ -97,7 +97,8 @@
   tags: ["golang", "extra_packages"] 
 
 - debug:
-  msg: "{{ govc_result }}"
+    msg: "{{ govc_result }}"
+  tags: ["golang"]
 #- name: Copy ovftool
 #  copy:
 #  `  src: "{{ role_path }}/files/ovftool/"
