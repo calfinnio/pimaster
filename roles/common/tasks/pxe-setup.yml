@@ -51,6 +51,7 @@
     path: "{{ item.dns_statichosts }}"
     state: touch
   with_items: "{{ dnsmasq_vars }}"
+  become: yes
   notify: restart_dnsmasq
   tags: ["dnsmasq"]
 
@@ -59,6 +60,7 @@
     src: dnsmasq_logrotate.j2
     dest: /etc/logrotate.d/dnsmasq
   notify: restart_dnsmasq
+  become: yes
   tags: ["dnsmasq"]
 
 - name: Make sure Dnsmasq is running
