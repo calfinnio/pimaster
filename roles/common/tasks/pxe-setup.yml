@@ -2,6 +2,8 @@
 - name: Create USB directory for mount
   file:
     path: "{{ item.mount_path }}"
+    owner: homelab
+    group: users
     state: directory
   with_items: "{{ usb_vars }}"
   tags: ["usb"]
