@@ -38,7 +38,7 @@
   tags: ['ssh_key_ks','esxi_build']
 
 - debug:
-    msg: "{{ ssh_key_var }}"
+    msg: "{{ ssh_key_var.stdout }}"
   tags: ['ssh_key_ks']
   
 - name: Create ks file for automated install

@@ -25,6 +25,6 @@ vim-cmd hostsvc/start_esx_shell
 # Suppress ESXi Shell warning
 esxcli system settings advanced set -o /UserVars/SuppressShellWarning -i 1
 cat > /etc/ssh/keys-root/authorized_keys <<EOF
-ssh-rsa {{ ssh_pub_key }}
+ssh-rsa {{ ssh_pub_key.stdout }}
 # copy SSH authorized keys & overwrite existing
 EOF
