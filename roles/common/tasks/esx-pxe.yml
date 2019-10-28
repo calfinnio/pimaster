@@ -37,6 +37,10 @@
     ssh_pub_key: "{{ ssh_key_var }}"
   tags: ['ssh_key_ks','esxi_build']
 
+- debug:
+    msg: "{{ ssh_key_var }}"
+  tags: ['ssh_key_ks']
+  
 - name: Create ks file for automated install
   template:
     src: ks.cfg.j2
