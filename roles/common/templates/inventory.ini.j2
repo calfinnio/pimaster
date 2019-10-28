@@ -1,0 +1,9 @@
+[masternodes]
+pimaster ansible_host={{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}
+
+[homelab_esx]
+esx1 ansible_host={{ item.ip_addr }}
+
+[homelab_vcsa]
+
+[homelab_vesx]

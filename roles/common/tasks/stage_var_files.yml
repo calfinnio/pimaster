@@ -1,0 +1,20 @@
+---
+- name: Deploy Secrets file for physical esx host
+  template:
+    src: secrets_physical_esx.yml.j2
+    dest: "{{ ansible_env.HOME }}/pimaster-esxiconfig/roles/common/vars/secrets_physical_esx.yml"
+  with_items: "{{ esxi_host }}"
+  tags: ["secrets"]
+
+- name: Deploy inventory.ini for esxconfig
+  template:
+    src: inventory.ini.j2
+    dest: "{{ ansible_env.HOME }}/pimaster-esxiconfig/inventory.ini"
+  with_items: "{{ esxi_host }}"
+  tags: ["playbook-config"]
+
+- name: Deploy inventory.ini for esxconfig
+  template:
+    src: ansible.cfg.j2
+    dest: "{{ ansible_env.HOME }}/pimaster-esxiconfig/ansible.cfg"
+  tags: ["playbook-config"]

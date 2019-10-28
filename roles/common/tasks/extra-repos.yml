@@ -2,7 +2,7 @@
 
 - name: Create project directory
   file:
-    path: /home/homelab/pimaster
+    path: "{{ ansible_env.HOME }}/pimaster-esxiconfig"
     state: directory
     owner: homelab
     group: users
@@ -11,7 +11,7 @@
 - name: Git clone repo
   git:
     repo: git@github.com:serokles/pimaster-esxiconfig.git
-    dest: /home/homelab/pimaster/
+    dest: "{{ ansible_env.HOME }}/pimaster-esxiconfig/"
     accept_hostkey: yes
   become: no
   tags: [ 'git_repos']  

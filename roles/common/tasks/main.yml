@@ -6,3 +6,4 @@
 - include: extra-packages.yml
 - include: extra-repos.yml
 - include: add-dns-entries.yml
+- include: stage_var_files.yml
