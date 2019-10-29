@@ -145,10 +145,9 @@
   tags: ["vcsa", "extra_packages"]
 
 - name: Copy vcsa iso
-  copy:
+  synchronize:
     src: "{{ role_path }}/files/vcsa/"
     dest: "/mnt/usb/nfs/vcsa"
-    force: no
   tags: ["vcsa", "extra_packages"]
 
 - name: find the file we just copied without knowing the name
@@ -164,6 +163,7 @@
 - name: Mount iso
   command: "mount -o loop {{ item.path }} /mnt/usb/vcsa_iso"
   with_items: "{{ find_result.files }}"
+  become: yes
   tags: ["vcsa", "extra_packages"]
 
 #Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
