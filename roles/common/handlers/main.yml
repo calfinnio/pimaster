@@ -3,12 +3,12 @@
   service:
    name: dnsmasq
    state: restarted
-  beomce: yes
+  become: yes
 - name: restart_nginx
   service:
    name: nginx
    state: restarted
-  beomce: yes
+  become: yes
 - name: reload exports
   command: exportfs -r
   become: yes
