@@ -96,6 +96,10 @@
   #become_user: homelab
   tags: ["golang", "extra_packages"] 
 
+- name: add gopath to user path for non-ansible logins
+  shell: echo 'export GOPATH=$HOME/go' >> {{ ansible_env.HOME }}/.profile
+  tags: ["golang", "extra_packages"]
+
 - debug:
     msg: "{{ govc_result }}"
   tags: ["golang"]
@@ -165,6 +169,36 @@
   with_items: "{{ find_result.files }}"
   become: yes
   tags: ["vcsa", "extra_packages"]
+
+- name: Create terraform dir
+  file:
+    path: "{{ ansible_env.HOME }}/terraform"
+    state: directory
+  #become: no
+  #become_user: homelab  
+  tags: ["terraform", "extra_packages"]
+
+- name: download terraform
+  get_url:
+    url: https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_arm.zip
+    dest: "{{ ansible_env.HOME }}/terraform_0.12.13_linux_arm.zip"
+    checksum: sha256:7e6f52d841e962a5c18ed73cec565338937bd6170299897f6398495462e798f9
+  tags: ["terraform", "extra_packages"]
+
+- name: unzip terraform
+  unarchive:
+    src: "{{ ansible_env.HOME }}/terraform_0.12.13_linux_arm.zip"
+    dest: "{{ ansible_env.HOME }}/terraform"
+    remote_src: yes
+  tags: ["terraform", "extra_packages"]
+
+- name: add go and terraform to user path for non-ansible logins
+  shell: echo 'PATH="$HOME/go/bin:$HOME/terraform:$PATH"' >> {{ ansible_env.HOME }}/.profile
+  tags: ["terraform", "golang", "extra_packages"]
+
+
+#export GOPATH=$HOME/go
+#PATH="$HOME/go/bin:$PATH"
 
 #Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 # PS /home/homelab> Install-Module -Name VMware.PowerCLI -Scope CurrentUser
