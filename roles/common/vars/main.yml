@@ -47,3 +47,8 @@ dns_entries:
   - 192.168.1.11 esx1.houseofbears.co.uk
   - 192.168.1.12 pfsense.houseofbears.co.uk
   - 10.64.0.20 vcsa.houseofbears.co.uk
+
+network_vars:
+  - pfsense_ip: 192.168.1.12
+    homelab_subnet: 16
+    homelab_network: 10.64.0.0

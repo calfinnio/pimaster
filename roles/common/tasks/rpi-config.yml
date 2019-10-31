@@ -1,0 +1,13 @@
+---
+#- name: Gather current IP address
+#  
+#- name: Set current dhcp IP as static
+- name: Add static route for HomeLab
+  template: 
+    src: 40-route.j2
+    dest: /lib/dhcpcd/dhcpcd-hooks/
+    owner: root
+    group: root
+  become: yes
+  with_items: "{{ network_vars }}"
+  tags: ["rpi_route"]
