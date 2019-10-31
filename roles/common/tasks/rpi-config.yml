@@ -5,7 +5,7 @@
 - name: Add static route for HomeLab
   template: 
     src: 40-route.j2
-    dest: /lib/dhcpcd/dhcpcd-hooks/
+    dest: /lib/dhcpcd/dhcpcd-hooks/40-route
     owner: root
     group: root
   become: yes
