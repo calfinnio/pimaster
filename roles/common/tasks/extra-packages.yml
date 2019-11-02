@@ -7,13 +7,44 @@
     - git
   tags: ["git", "extra_packages"]
 
+- name: add ansible repo to sources
+  shell: echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu bionic main" | tee -a /etc/apt/sources.list
+  become: yes
+  tags: ["ansible"]
+
+- name: add key for repo added above
+  shell: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+  become: yes
+  tags: ["ansible"]
+
+- name: updates a server
+  apt: update_cache=yes
+  become: yes
+  tags: ["ansible"]
+
+- name: upgrade a server
+  apt: upgrade=full
+  become: yes
+  tags: ["ansible"]
+
 - name: Install ansible
   apt:
     name: "{{ packages }}"
   vars:
     packages:
     - ansible
+  become: yes
   tags: ["ansible", "extra_packages"]
+
+- name: debug ansible version
+  shell: ansible --version
+  register: ansible_version
+  tags: ["ansible"]
+
+- name: print ansible version
+  debug:
+    msg: "{{ ansible_version }}"
+  tags: ["ansible"]
 
 - name: Install dnsutils
   apt:
