@@ -240,6 +240,11 @@
   pip:
     name: jmespath
   tags: ["python", "extra_packages"]
+
+- name: Install dnspython
+  pip:
+    name: dnspython
+  tags: ["python", "extra_packages"]
 #export GOPATH=$HOME/go
 #PATH="$HOME/go/bin:$PATH"
 
