@@ -227,7 +227,19 @@
   shell: echo 'PATH="$HOME/go/bin:$HOME/terraform:$PATH"' >> {{ ansible_env.HOME }}/.profile
   tags: ["terraform", "golang", "extra_packages"]
 
+- name: install pip for python 2.7
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - python-pip
+  become: yes
+  tags: ["python", "extra_packages"]
 
+- name: Install jmespath for jquery
+  pip:
+    name: jmespath
+  tags: ["python", "extra_packages"]
 #export GOPATH=$HOME/go
 #PATH="$HOME/go/bin:$PATH"
 
