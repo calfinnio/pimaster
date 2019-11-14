@@ -107,7 +107,7 @@
   shell: go get -u github.com/vmware/govmomi/govc
   environment:
     GOPATH: "{{ go_path }}"
-  when: not result|failed
+  when: result.failed|bool == false
   #become: no
   #become_user: homelab
   tags: ["golang", "extra_packages"]
@@ -116,7 +116,7 @@
   shell: go install github.com/vmware/govmomi/govc
   environment:
     GOPATH: "{{ go_path }}"
-  when: not result|failed
+  when: result.failed|bool == false
   #become: no
   #become_user: homelab
   tags: ["golang", "extra_packages"]
@@ -127,7 +127,7 @@
     GOPATH: "{{ go_path }}"
     PATH: "{{ go_bin }}"
   register: govc_result
-  when: not result|failed
+  when: result.failed|bool == false
   #become: no
   #become_user: homelab
   tags: ["golang", "extra_packages"] 
