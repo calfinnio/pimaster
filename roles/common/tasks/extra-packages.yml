@@ -250,6 +250,12 @@
   pip:
     name: dnspython
   tags: ["python", "extra_packages"]
+
+- name: Install netaddr
+  pip:
+    name: netaddr
+  tags: ["python", "extra_packages"]
+
 #export GOPATH=$HOME/go
 #PATH="$HOME/go/bin:$PATH"
 
