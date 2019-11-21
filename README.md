@@ -24,6 +24,7 @@ The following are required currently for this project:
   - USB thumbdrive for Pi
   - Workstation or Server booting from USB
   - A metric ton of variables  
+  - ovftool installed on local linux desktop
 
 ## Install - inital user creation
   
@@ -103,12 +104,12 @@ We should now have a Pi running and a user we can use on it.  The next step is t
 | pfsense_ip_addr |  What is the IP of your pfsense VM WAN port?  This is for the exports file. | 192.168.1.12 |
 
 ### dns_entries  
-|IP Address | Hostname|
-|---|---|  
-| 192.168.1.44 | pimaster.houseofbears.co.uk |
-| 192.168.1.11 | esx1.houseofbears.co.uk |
-| 192.168.1.12 | pfsense.houseofbears.co.uk |
-| 10.64.0.20 | vcsa.houseofbears.co.uk |
+|IP Address | Hostname| Purpose |  
+|---|---|---|  
+| 192.168.1.44 | pimaster.houseofbears.co.uk | Pi node that deploys installs and runs config scripts later. |  
+| 192.168.1.11 | esx1.houseofbears.co.uk | Physical ESXi host. |  
+| 192.168.1.12 | pfsense.houseofbears.co.uk | WAN IP address of pfsense VM.  WAN in this case is an IP on your home network. |  
+| 10.64.0.20 | vcsa.houseofbears.co.uk | IP address of the VCSA.  This will be on the pfsense LAN segment. |
 
 ### network_vars  
 |Variable Name|Purpose| My Value|
@@ -117,6 +118,20 @@ We should now have a Pi running and a user we can use on it.  The next step is t
 | homelab_subnet | CIDR of homelab LAN | 16 |
 | homelab_network| Network range of homelab LAN |10.64.0.0 |
 
+## Results  
+
+After the playbooks in this repo have run you should have the following:  
+
+- ESXi installed on a physical host with an IP and specified root password.
+- Pi configured with static route to proposed network for VMs.
+- Clones of ESXi configuration repo and secret files specified.
+- gov installed on Pi and ovftool deployed to ESXi host.  
+
+This should be enough to play with vsphere but if you want the next stage then follow this repo:  
+
+      https://github.com/serokles/pimaster-esxiconfig  
+
+Which will configure the node and deploy the nested ESXi lab.
 
 
 
