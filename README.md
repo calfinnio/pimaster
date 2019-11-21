@@ -66,7 +66,8 @@ We should now have a Pi running and a user we can use on it.  The next step is t
 | network_range |What is the range of your existing LAN?  This is so that dnsmasq can operate in the same range to provide proxy PxE. | 192.168.1.0 |  
 | dhcp_proxy | This set dnsmasq to proxy mode.  Not full DHCP so your home router can still server normal clients.  this will just add in the PxE settings for nodes that request it. | true |  
 | tftp | Do you want TFTP enabled? Short answer is yes if you want ESXi installed. | true |  
-| tftp_root | Where to place the root of your TFTP server? | /mnt/usb/tftpboot || pxe_service | This sets the client system type, menu text and then the file to read from. | 'X86PC,"PXE Boot...",pxelinux' |  
+| tftp_root | Where to place the root of your TFTP server? | /mnt/usb/tftpboot |  
+| pxe_service | This sets the client system type, menu text and then the file to read from. | 'X86PC,"PXE Boot...",pxelinux' |  
 | dns_enabled | Do you want to enable DNS? For the VCSA to function this should be true | true |  
 | port | What port do you want DNS to operate on - default is 53 | 53 |  
 | dns_upstream | When it cant answer a query where should a DNS query be sent? Most likely this is your home router address. | 192.168.1.1 |  
