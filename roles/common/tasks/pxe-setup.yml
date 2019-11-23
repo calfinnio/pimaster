@@ -43,6 +43,7 @@
     dest: /etc/dnsmasq.conf
     validate: "dnsmasq --test --conf-file=%s"
   with_items: "{{ dnsmasq_vars }}"
+  become: yes
   notify: restart_dnsmasq
   tags: ["dnsmasq"]
 
@@ -71,10 +72,11 @@
   tags: ["dnsmasq"]
 
 - name: create users
-  user: name=nginx
-    uid=1010
-    state=present
-    shell=/bin/bash
+  user: 
+    name: nginx
+    uid: 1010
+    state: present
+    shell: /bin/bash
   tags: ["nginx"]
 
 - name: Install nginx
