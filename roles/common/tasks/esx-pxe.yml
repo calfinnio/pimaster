@@ -12,7 +12,6 @@
     dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}"
     force: no
   with_items: "{{ esxi_host }}"
-  when: refresh|bool == "True"
   tags: [ 'esxi_build']
 
 - name: Using sed to remove "/" from boot.cfg
