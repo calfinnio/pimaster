@@ -80,12 +80,14 @@
     uid: 1010
     state: present
     shell: /bin/bash
+  become: yes
   tags: ["nginx"]
 
 - name: Install nginx
   package:
     name: nginx
     state: present
+  become: yes
   tags: ["nginx"]
 
 - name: Creates directory
@@ -103,6 +105,7 @@
     group: nginx
     mode: u=rw,g=r,o=r
   with_items: "{{ nginx_vars }}"
+  become: yes
   notify: restart_nginx
   tags: ["nginx"]
 
@@ -154,6 +157,7 @@
   package:
     name: wakeonlan
     state: present
+  become: yes
   tags: ["wol"]
 
 - name: Creates directory
@@ -170,6 +174,7 @@
     packages:
     - nfs-common
     - nfs-kernel-server
+  become: yes
   tags: ["nfs"]
 
 - name: copy /etc/exports
@@ -179,6 +184,7 @@
     owner: root
     group: root
   with_items: "{{ nfs_vars }}"
+  become: yes
   tags: ["nfs"]
 
 - name: restart nfs server
