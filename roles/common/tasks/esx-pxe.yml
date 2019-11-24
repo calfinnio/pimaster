@@ -10,7 +10,6 @@
   synchronize:
     src: "{{ role_path }}/files/esxi/"
     dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}"
-    force: no
   with_items: "{{ esxi_host }}"
   tags: [ 'esxi_build']
 
