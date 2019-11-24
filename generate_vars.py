@@ -1,6 +1,5 @@
 
-import yaml
-
+import ruamel.yaml
 
 def yes_or_no(question):
     reply = str(input(question+' (y/n): ')).lower().strip()
