@@ -48,6 +48,8 @@ The following are required currently for this project:
   - Configure SSH agent forwarding (needed for cloning git repos to PiMaster box later)  
     - eval "$(ssh-agent -s)"  
     - ssh-add ~/.ssh/id_rsa  
+  - Scan keys in to known_hosts:
+    - ssh-keyscan -H [IP of PiMaster] >> ~/.ssh/known_hosts
   -  Run the initial playbook to stage the homelab user to the Pi 
   -  This will prompt for the default pi user password 
      -  ansible-playbook initial.yml -l masternodes --ask-pass  
