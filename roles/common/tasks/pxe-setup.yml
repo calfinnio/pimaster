@@ -23,12 +23,14 @@
   package:
     name: dnsmasq
     state: present
+  become: yes
   tags: ["dnsmasq"]
 
 - name: Install syslinux-common
   package:
     name: syslinux-common
     state: present
+  become: yes
   tags: ["dnsmasq"]
 
 - name: Creates directory
