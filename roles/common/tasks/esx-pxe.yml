@@ -7,12 +7,12 @@
   tags: [ 'esxi_build']
 
 - name: Copy files from local to PXE/TFTP host
-  copy:
+  synchronize:
     src: "{{ role_path }}/files/esxi/"
     dest: "{{ item.tftp_root }}esxi{{ item.major_version }}{{ item.minor_version }}"
     force: no
   with_items: "{{ esxi_host }}"
-  when: refresh | default(False)
+  when: refresh|bool == "True"
   tags: [ 'esxi_build']
 
 - name: Using sed to remove "/" from boot.cfg
@@ -37,8 +37,10 @@
     ssh_pub_key: "{{ ssh_key_var }}"
   tags: ['ssh_key_ks','esxi_build']
 
-- debug:
+- name: Debug ssh key
+  debug:
     msg: "{{ ssh_key_var.stdout }}"
+    verbosity: 2
   tags: ['ssh_key_ks']
   
 - name: Create ks file for automated install
