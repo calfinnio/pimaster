@@ -1,9 +1,23 @@
 ---
-- name: Restart dnsmasq
-  shell: whoami
-  notify: restart_dnsmasq
+- name: Restart pimaster
+  shell: "sleep 5 && reboot"
+  async: 1
+  poll: 0
   become: yes
-  tags: ["dnsmasq"]
+  tags: [ 'esxi_install' ]
+
+- name: wait for 10 seconds
+  pause:
+    seconds: 10
+  tags: [ 'esxi_install' ]
+
+- name: wait for the system to reboot
+  wait_for_connection:
+    connect_timeout: 20
+    sleep: 5
+    delay: 5
+    timeout: 60
+  tags: [ 'esxi_install' ]
 
 - name: Wake on Lan physical host
   shell:  wakeonlan {{ item.macaddress }}
