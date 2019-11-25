@@ -1,0 +1,45 @@
+---
+usb_vars:
+  mount_path: /mnt/usb/
+dnsmasq_vars:
+  log: true
+  network_range: 192.168.1.0
+  dhcp_proxy: true
+  tftp: true
+  tftp_root: /mnt/usb/tftpboot
+  pxe_service: "'X86PC,\"PXE Boot...\",pxelinux'"
+  dns_enabled: true
+  port: 53
+  dns_upstream: 192.168.1.1
+  dns_domainname: homelab.local
+  dns_statichosts: /etc/dnsmasq_static_hosts.conf
+nginx_vars:
+  nginx_service_name: nginx
+  nginx_port: '80'
+  nginx_root: /mnt/usb/www/html
+esxi_host:
+  hostname: esx1.homelab.local
+  root_passwd: VMware1!
+  macaddress: 34:17:eb:ba:2c:c1
+  ip_addr: 192.168.1.11
+  ip_subnetmask: 255.255.255.0
+  ip_gateway: 192.168.1.1
+  ip_nameserver: 192.168.1.44
+  major_version: '67'
+  minor_version: u3
+  tftp_root: /mnt/usb/tftpboot
+  refresh: true
+  nginx_root: /mnt/usb/www/html
+nfs_vars:
+  nfs_root: /mnt/usb/nfs
+  esx_ip_addr: 192.168.1.11
+  pfsense_ip_addr: 192.168.1.12
+network_vars:
+  pfsense_ip: 192.168.1.12
+  homelab_subnet: '16'
+  homelab_network: 10.64.0.0
+dns_entries:
+-   192.168.1.44 pimaster.homelab.local
+-   192.168.1.11 esx1.homelab.local
+-   192.168.1.12 pfsense.homelab.local
+-   10.64.0.20 vcsa.homelab.local

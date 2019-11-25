@@ -41,6 +41,19 @@
   with_items: "{{ dnsmasq_vars }}"
   tags: ["dnsmasq"]
 
+- name: Ansible check directory exists example.
+  stat:
+    path: "{{ item.tftp_root }}"
+  with_items: "{{ dnsmasq_vars }}"
+  register: tftp_root_exists
+  tags: ["dnsmasq"]
+
+- name: Debug TFTPRoot Directory
+  debug:
+    msg: "It is a directory"
+  when: tftp_root_exists.stat.exists and tftp_root_exists.stat.isdir
+  tags: ["dnsmasq"]
+
 - name: Set configuration file
   template:
     src: etc_dnsmasq.conf.j2
