@@ -50,9 +50,11 @@
 
 - name: Debug TFTPRoot Directory
   debug:
-    msg: "It is a directory"
-  when: tftp_root_exists.stat.exists and tftp_root_exists.stat.isdir
+    msg: "{{ tftp_root_exists }}"
+    verbosity: 2
+  #when: tftp_root_exists.stat.exists and tftp_root_exists.stat.isdir
   tags: ["dnsmasq"]
+
 
 - name: Set configuration file
   template:
