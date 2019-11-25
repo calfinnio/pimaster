@@ -33,10 +33,11 @@
   become: yes
   tags: ["dnsmasq"]
 
-- name: Creates directory
+- name: Creates tftproot directory
   file:
     path: "{{ item.tftp_root }}"
     state: directory
+    mode: '0755'
   with_items: "{{ dnsmasq_vars }}"
   tags: ["dnsmasq"]
 
