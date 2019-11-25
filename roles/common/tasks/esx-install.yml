@@ -1,4 +1,9 @@
 ---
+- name: Restart dnsmasq
+  notify: restart_dnsmasq
+  become: yes
+  tags: ["dnsmasq"]
+  
 - name: Wake on Lan physical host
   shell:  wakeonlan {{ item.macaddress }}
   with_items: "{{ esxi_host }}"
