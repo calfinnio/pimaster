@@ -5,4 +5,5 @@
     line: "{{ item }}"
     state: present
   loop: "{{ dns_entries }}"
+  become: yes
   tags: [ 'dns_entries']
