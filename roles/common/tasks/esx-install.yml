@@ -13,8 +13,8 @@
 
 - command: /bin/ping -c 1 {{ item.ip_addr }}
   register: result
-  retries: 150
-  delay: 20
+  retries: 300
+  delay: 10
   until: result is not failed
   with_items: "{{ esxi_host }}"
   tags: [ 'esxi_install']
