@@ -5,6 +5,7 @@
   vars:
     packages:
     - git
+  become: yes
   tags: ["git", "extra_packages"]
 
 - name: add ansible repo to sources
@@ -52,6 +53,7 @@
   vars:
     packages:
     - dnsutils
+  become: yes
   tags: ["dnsutils", "extra_packages"]
 
 - name: Install golang, jq
@@ -61,6 +63,7 @@
     packages:
     - golang
     - jq
+  become: yes
   tags: ["golang", "extra_packages"]
 
 - name: whomai for debug
@@ -70,6 +73,7 @@
 
 - debug:
     msg: "{{ user_info }}"
+    verbosity: 2
   tags: ["golang"]
 
 - name: Create go dir
