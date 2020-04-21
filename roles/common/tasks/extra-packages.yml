@@ -60,7 +60,7 @@
   get_url:
     url: https://dl.google.com/go/go1.12.17.linux-armv6l.tar.gz
     dest: /home/homelab/go1.12.17.linux-armv6l.tar.gz
-    checksum: a883c806fccb3eddb26da4a1a1f8536de863aee6807ed6c99606261877af7b99
+    checksum: sha256:a883c806fccb3eddb26da4a1a1f8536de863aee6807ed6c99606261877af7b99
   tags: ["golang"]
 
 - name: Unarchive golang v1.12.17
