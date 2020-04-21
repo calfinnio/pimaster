@@ -56,15 +56,40 @@
   become: yes
   tags: ["dnsutils", "extra_packages"]
 
+- name: download golang v1.12.17
+  get_url:
+    url: https://dl.google.com/go/go1.12.17.linux-armv6l.tar.gz
+    dest: /home/homelab/go1.12.17.linux-armv6l.tar.gz
+    checksum: a883c806fccb3eddb26da4a1a1f8536de863aee6807ed6c99606261877af7b99
+  tags: ["golang"]
+
+- name: Unarchive golang v1.12.17
+  unarchive:
+    src: /home/homelab/go1.12.17.linux-armv6l.tar.gz
+    dest: /usr/local
+    remote_src: yes
+  become: yes
+  tags: ["golang"]
+
+- name: Create a symbolic link
+  file:
+    src: /usr/local/go/bin/go
+    dest: /usr/bin/go
+    owner: root
+    group: root
+    state: link
+    mode: '0755'
+  become: yes
+  tags: ["golang"]
+
 - name: Install golang, jq
   apt:
     name: "{{ packages }}"
   vars:
     packages:
-    - golang
     - jq
   become: yes
-  tags: ["golang", "extra_packages"]
+  tags: [extra_packages"]
 
 - name: whomai for debug
   shell: whoami
