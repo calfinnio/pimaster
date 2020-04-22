@@ -217,7 +217,8 @@
   synchronize:
     src: "{{ role_path }}/files/vcsa/"
     dest: "/mnt/usb/nfs/vcsa"
-    checksum: yes
+    times: no
+    checksum: yes 
   tags: ["vcsa", "extra_packages"]
 
 - name: find the file we just copied without knowing the name
