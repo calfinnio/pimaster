@@ -218,7 +218,8 @@
     src: "{{ role_path }}/files/vcsa/"
     dest: "/mnt/usb/nfs/vcsa"
     times: no
-    checksum: yes 
+    checksum: yes
+  become: yes
   tags: ["vcsa", "extra_packages"]
 
 - name: find the file we just copied without knowing the name
