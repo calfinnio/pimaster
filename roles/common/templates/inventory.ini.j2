@@ -4,6 +4,7 @@ pimaster ansible_host={{ hostvars[inventory_hostname]['ansible_default_ipv4']['a
 [homelab_esx]
 esx1 ansible_host={{ item.ip_addr }}
 
-[homelab_vcsa]
+[homelab_pfsense]
+pfsense ansible_host=192.168.1.12
 
 [homelab_vesx]
