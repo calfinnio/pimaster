@@ -31,8 +31,8 @@ esxi_host:
     ip_subnetmask: 255.255.255.0
     ip_gateway: 192.168.1.1
     ip_nameserver: 192.168.1.1
-    major_version: "67"
-    minor_version: "u3"
+    major_version: "7"
+    minor_version: "u1"
     tftp_root: /mnt/usb/tftpboot/
     refresh: True
     nginx_root: "/mnt/usb/www/html"
