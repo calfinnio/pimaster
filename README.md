@@ -121,6 +121,11 @@ We should now have a Pi running and a user we can use on it.  The next step is t
 | homelab_subnet | CIDR of homelab LAN | 16 |
 | homelab_network| Network range of homelab LAN |10.64.0.0 |
 
+## Run playbook  
+Now all the variables are configured and the user is set you can run the following to configure the Pi, copy all the files, power on the host and install ESXi:  
+
+      ansible-playbook site.yml -l masternodes -e "production=true"
+
 ## Results  
 
 After the playbooks in this repo have run you should have the following:  

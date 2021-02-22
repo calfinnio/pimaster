@@ -25,6 +25,9 @@
     src: "/home/homelab/.ssh/id_rsa.pub"
     dest: "/home/homelab/.ssh/id_rsa.pub"
     force: no
+    owner: homelab
+    group: users
+    mode: 0644
   tags: [ 'users']
 
 - name: Copy files from local to PiMaster
@@ -32,6 +35,9 @@
     src: "/home/homelab/.ssh/id_rsa"
     dest: "/home/homelab/.ssh/id_rsa"
     force: no
+    owner: homelab
+    group: users
+    mode: 0600
   tags: [ 'users']
 
 - name: Add homelab user to the sudoers
