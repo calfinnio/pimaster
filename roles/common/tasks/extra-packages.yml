@@ -238,6 +238,24 @@
   become: yes
   tags: ["vcsa", "extra_packages"]
 
+- name: find the OVA file from VCSA ISO
+  find:
+    paths: /mnt/usb/vcsa_iso/vcsa/
+    file_type: "file"
+    patterns: "*ova"
+  register: find_result_ova
+  tags: ["vcsa", "extra_packages"]
+- debug:
+    var: find_result_ova
+
+- name: Copy a "ova" file for use later
+  copy:
+    src: "{{ item.path }}"
+    dest: /mnt/usb/nfs/vcsa/vcsa2.ova
+    remote_src: yes
+  with_items: "{{ find_result_ova.files }}"
+  tags: ["vcsa", "extra_packages"]
+
 - name: Create terraform dir
   file:
     path: "{{ ansible_env.HOME }}/terraform"
