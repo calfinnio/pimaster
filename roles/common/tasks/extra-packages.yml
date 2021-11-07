@@ -132,23 +132,50 @@
   #become_user: homelab
   tags: ["golang", "extra_packages"]
 
-- name: go get govc
-  shell: go get -u github.com/vmware/govmomi/govc
-  environment:
-    GOPATH: "{{ go_path }}"
-  when: result.failed|bool == false
-  #become: no
-  #become_user: homelab
-  tags: ["golang", "extra_packages"]
+#- name: go get govc
+#  shell: go get -u github.com/vmware/govmomi/govc
+#  environment:
+#    GOPATH: "{{ go_path }}"
+#  when: result.failed|bool == false
+#  #become: no
+#  #become_user: homelab
+#  tags: ["golang", "extra_packages"]
 
-- name: go install govc
-  shell: go install github.com/vmware/govmomi/govc
-  environment:
-    GOPATH: "{{ go_path }}"
-  when: result.failed|bool == false
-  #become: no
-  #become_user: homelab
-  tags: ["golang", "extra_packages"]
+#- name: go install govc
+#  shell: go install github.com/vmware/govmomi/govc
+#  environment:
+#    GOPATH: "{{ go_path }}"
+#  when: result.failed|bool == false
+#  #become: no
+#  #become_user: homelab
+#  tags: ["golang", "extra_packages"]
+#https://github.com/vmware/govmomi/releases/download/v0.27.1/govc_Linux_armv6.tar.gz
+
+- name: download govc binary v0.27.1
+  get_url:
+    url: https://github.com/vmware/govmomi/releases/download/v0.27.1/govc_Linux_armv6.tar.gz
+    dest: /home/homelab/govc_Linux_armv6.tar.gz
+    checksum: sha256:5b9d2908d0d10994af797070d3e7165de6e8456dc412bd208d7f62281ffe54b0
+  tags: ["golang"]
+
+- name: Unarchive govc binary v0.27.1
+  unarchive:
+    src: /home/homelab/govc_Linux_armv6.tar.gz
+    dest: /usr/local
+    remote_src: yes
+  become: yes
+  tags: ["golang"]
+
+- name: Create a symbolic link govc
+  file:
+    src: /usr/local/govc
+    dest: /usr/bin/govc
+    owner: root
+    group: root
+    state: link
+    mode: '0755'
+  become: yes
+  tags: ["golang"]
 
 - name: govc test
   shell: govc version
