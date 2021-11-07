@@ -56,16 +56,16 @@
   become: yes
   tags: ["dnsutils", "extra_packages"]
 
-- name: download golang v1.12.17
+- name: download golang v1.14.15
   get_url:
-    url: https://dl.google.com/go/go1.12.17.linux-armv6l.tar.gz
-    dest: /home/homelab/go1.12.17.linux-armv6l.tar.gz
-    checksum: sha256:a883c806fccb3eddb26da4a1a1f8536de863aee6807ed6c99606261877af7b99
+    url: https://golang.org/dl/go1.14.15.linux-armv6l.tar.gz
+    dest: /home/homelab/go1.14.15.linux-armv6l.tar.gz
+    checksum: sha256:a63960d9b9c14954e299ffe060c0574ffb91ab810837da5941853b664d0652da
   tags: ["golang"]
 
-- name: Unarchive golang v1.12.17
+- name: Unarchive golang v1.14.15
   unarchive:
-    src: /home/homelab/go1.12.17.linux-armv6l.tar.gz
+    src: /home/homelab/go1.14.15.linux-armv6l.tar.gz
     dest: /usr/local
     remote_src: yes
   become: yes
