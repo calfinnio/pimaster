@@ -179,9 +179,6 @@
 
 - name: govc test
   shell: govc version
-  environment:
-    GOPATH: "{{ go_path }}"
-    PATH: "{{ go_bin }}"
   register: govc_result
   when: result.failed|bool == false
   #become: no
