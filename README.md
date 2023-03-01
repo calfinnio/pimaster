@@ -38,7 +38,7 @@ The following are required currently for this project:
   - Generate ssh keys:
     - ssh-keygen -t rsa -b 4096  
   - Clone this repo  
-    - git clone git@github.com:serokles/pimaster.git
+    - git clone git@github.com:calfinnio/pimaster.git
   - Convert password to ansible "secure" string (should move to ansible vault in the future but this works for now and make sure you use the same password for the account when you created it):  
     - mkpasswd --method=SHA-512  
   - Copy the above value in to main.yml under roles/initial/vars under **homelab_password**  
@@ -137,7 +137,7 @@ After the playbooks in this repo have run you should have the following:
 
 This should be enough to play with vsphere but if you want the next stage then follow this repo:  
 
-      https://github.com/serokles/pimaster-esxiconfig  
+      https://github.com/calfinnio/pimaster-esxiconfig  
 
 Which will configure the node and deploy the nested ESXi lab.
 
